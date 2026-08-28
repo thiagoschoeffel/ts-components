@@ -1,0 +1,54 @@
+{
+  "name": "ts-components",
+  "version": "0.3.21",
+  "description": "A lightweight component library for Vue 3",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/ts-components.cjs",
+  "module": "./dist/ts-components.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/ts-components.js",
+      "require": "./dist/ts-components.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "scripts": {
+    "build": "vue-tsc --noEmit && vite build",
+    "build-storybook": "storybook build",
+    "storybook": "storybook dev -p 6006",
+    "typecheck": "vue-tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "^10.5.10",
+    "@storybook/addon-docs": "^10.5.10",
+    "@storybook/vue3-vite": "^10.5.10",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "storybook": "^10.5.10",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.2",
+    "vite-plugin-dts": "^5.0.3",
+    "vue": "^3.5.42",
+    "vue-tsc": "^3.1.5"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "components"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@lucide/vue": "^1.34.0",
+    "reka-ui": "^2.10.4"
+  }
+}

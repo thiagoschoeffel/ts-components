@@ -1,5 +1,5 @@
 {
-  "name": "ts-components",
+  "name": "@thiagoschoeffel/ts-components",
   "version": "0.3.21",
   "description": "A lightweight component library for Vue 3",
   "type": "module",
@@ -9,6 +9,18 @@
   "main": "./dist/ts-components.cjs",
   "module": "./dist/ts-components.js",
   "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thiagoschoeffel/ts-components.git"
+  },
+  "homepage": "https://github.com/thiagoschoeffel/ts-components#readme",
+  "bugs": {
+    "url": "https://github.com/thiagoschoeffel/ts-components/issues"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -22,7 +34,7 @@
     "build-storybook": "storybook build",
     "storybook": "storybook dev -p 6006",
     "typecheck": "vue-tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepack": "npm run build"
   },
   "peerDependencies": {
     "vue": "^3.5.0"

@@ -12,7 +12,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Icons exported by `ts-components`. Import any icon by its displayed name, for example: `import { MenuIcon } from \'ts-components\'`.'
+          'Icons exported by `@thiagoschoeffel/ts-components`. Import any icon by its displayed name, for example: `import { MenuIcon } from \'@thiagoschoeffel/ts-components\'`.'
       }
     }
   },

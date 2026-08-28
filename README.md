@@ -27,26 +27,31 @@ npm run build-storybook
 
 The static site is generated in `storybook-static`.
 
-Before publishing, make sure `ts-components` is available on npm, or change
-the package name in `package.json` to your preferred scoped name.
+The package is published to GitHub Packages whenever a GitHub release is
+published. The release tag must match the version in `package.json`, prefixed
+with `v` (for example, version `0.3.21` uses tag `v0.3.21`).
 
 ```bash
-npm login
-npm publish --access public
+npm version patch
+git push origin main --follow-tags
 ```
+
+Then create and publish a GitHub release for the generated tag. The publishing
+workflow builds the library and authenticates with the repository's
+`GITHUB_TOKEN`.
 
 ## Usage in another project
 
 ```bash
-npm install ts-components
+npm install @thiagoschoeffel/ts-components
 ```
 
 Import only the component you need:
 
 ```vue
 <script setup lang="ts">
-import { Button } from 'ts-components'
-import 'ts-components/style.css'
+import { Button } from '@thiagoschoeffel/ts-components'
+import '@thiagoschoeffel/ts-components/style.css'
 </script>
 
 <template>
@@ -61,8 +66,8 @@ Or register every component globally in `main.ts`:
 ```ts
 import { createApp } from 'vue'
 import App from './App.vue'
-import TsComponents from 'ts-components'
-import 'ts-components/style.css'
+import TsComponents from '@thiagoschoeffel/ts-components'
+import '@thiagoschoeffel/ts-components/style.css'
 
 createApp(App).use(TsComponents).mount('#app')
 ```
@@ -73,7 +78,7 @@ Selected Lucide icons can be imported directly from the library:
 
 ```vue
 <script setup lang="ts">
-import { MenuIcon } from 'ts-components'
+import { MenuIcon } from '@thiagoschoeffel/ts-components'
 </script>
 
 <template>

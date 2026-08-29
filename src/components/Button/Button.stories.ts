@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { computed } from 'vue'
-import * as availableIcons from '../../icons'
+import {
+  getIconComponent,
+  iconControlOptions,
+  type IconControlName
+} from '../../iconControls'
 import Button from './Button.vue'
 
 const variants = ['primary', 'secondary', 'success', 'warning', 'danger'] as const
 const sizes = ['small', 'medium', 'large'] as const
-const iconOptions = ['Nenhum', ...Object.keys(availableIcons)]
-
-type IconName = keyof typeof availableIcons | 'Nenhum'
-
 interface ButtonStoryArgs {
   variant: (typeof variants)[number]
   size: (typeof sizes)[number]
@@ -16,8 +16,8 @@ interface ButtonStoryArgs {
   disabled: boolean
   loading: boolean
   iconOnly: boolean
-  iconName: IconName
-  trailingIconName: IconName
+  iconName: IconControlName
+  trailingIconName: IconControlName
   default?: unknown
   icon?: unknown
   trailingIcon?: unknown
@@ -62,13 +62,13 @@ Botão inspirado nos controles do macOS, com variações de cor, tamanho e estad
     },
     iconName: {
       control: 'select',
-      options: iconOptions,
+      options: iconControlOptions,
       description: 'Controle do Storybook para experimentar um ícone inicial.',
       table: { category: 'Storybook' }
     },
     trailingIconName: {
       control: 'select',
-      options: iconOptions,
+      options: iconControlOptions,
       description: 'Controle do Storybook para experimentar um ícone final.',
       table: { category: 'Storybook' }
     },
@@ -123,12 +123,8 @@ Botão inspirado nos controles do macOS, com variações de cor, tamanho e estad
   render: (args) => ({
     components: { Button },
     setup() {
-      const selectedIcon = computed(() =>
-        args.iconName === 'Nenhum' ? null : availableIcons[args.iconName]
-      )
-      const selectedTrailingIcon = computed(() =>
-        args.trailingIconName === 'Nenhum' ? null : availableIcons[args.trailingIconName]
-      )
+      const selectedIcon = computed(() => getIconComponent(args.iconName))
+      const selectedTrailingIcon = computed(() => getIconComponent(args.trailingIconName))
 
       return { args, selectedIcon, selectedTrailingIcon }
     },

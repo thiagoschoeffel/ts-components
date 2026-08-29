@@ -51,6 +51,10 @@ Campo de seleção baseado no Reka UI, com rótulo, descrição, estado indeterm
       control: 'text',
       description: 'Identificador usado para associar o controle ao rótulo.'
     },
+    ariaLabel: {
+      control: 'text',
+      description: 'Nome acessível usado quando não há um rótulo visível.'
+    },
     name: {
       control: 'text',
       description: 'Nome enviado junto ao formulário.'
@@ -98,6 +102,7 @@ Campo de seleção baseado no Reka UI, com rótulo, descrição, estado indeterm
         :description="args.description"
         :size="args.size"
         :id="args.id"
+        :aria-label="args.ariaLabel"
         :name="args.name"
         :value="args.value"
         :required="args.required"

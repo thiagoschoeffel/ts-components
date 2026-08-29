@@ -24,8 +24,7 @@ Representa visualmente um estado de avanço ou capacidade, com semântica acess�
   argTypes: {
     value: {
       control: { type: 'range', min: 0, max: 100, step: 1 },
-      description: 'Valor atual do progresso.',
-      table: { defaultValue: { summary: 'required' } }
+      description: 'Valor atual do progresso.'
     },
     max: {
       control: { type: 'number', min: 1 },

@@ -1,9 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import * as availableIcons from './icons'
-
-const icons = Object.entries(availableIcons)
-  .sort(([firstName], [secondName]) => firstName.localeCompare(secondName))
-  .map(([name, component]) => ({ name, component }))
+import { availableIconEntries } from './iconControls'
 
 const meta = {
   title: 'Icons/Available Icons',
@@ -48,7 +44,7 @@ export const Gallery: Story = {
     layout: 'fullscreen'
   },
   render: (args) => ({
-    setup: () => ({ args, icons }),
+    setup: () => ({ args, icons: availableIconEntries }),
     template: `
       <div class="box-border grid w-full min-w-0 grid-cols-[repeat(auto-fit,minmax(min(9rem,100%),1fr))] gap-4 p-4">
         <article

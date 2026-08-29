@@ -8,16 +8,16 @@ const meta = {
   argTypes: {
     src: {
       control: 'text',
-      description: 'URL of the image displayed in the avatar.'
+      description: 'URL da imagem exibida no avatar.'
     },
     altText: {
       control: 'text',
-      description: 'Accessible alternative text for the avatar image.',
+      description: 'Texto alternativo acessível da imagem.',
       table: { defaultValue: { summary: 'User avatar' } }
     },
     fallback: {
       control: 'text',
-      description: 'Text displayed while the image is unavailable.',
+      description: 'Texto exibido enquanto a imagem estiver indisponível.',
       table: { defaultValue: { summary: 'US' } }
     }
   },

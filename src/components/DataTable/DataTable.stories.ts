@@ -36,6 +36,7 @@ const statusVariants = {
 const rows = Array.from({ length: 18 }, (_, index) => ({
   id: index + 1,
   order: `#${String(index + 1841).padStart(4, '0')}`,
+  orderTime: `${String(10 + Math.floor(index / 4)).padStart(2, '0')}:${String((index * 7) % 60).padStart(2, '0')}`,
   customer: customers[index % customers.length],
   status: statuses[index % statuses.length],
   channel: index % 3 === 0 ? 'Atendimento' : 'Aplicativo',
@@ -43,6 +44,13 @@ const rows = Array.from({ length: 18 }, (_, index) => ({
   address: `Rua das Flores, ${120 + index} · Centro`,
   total: `R$ ${(42 + index * 3.75).toFixed(2).replace('.', ',')}`
 }))
+
+const hiddenGeneratedArgTypes = {
+  'getColumnSlotName(column.key)': {
+    control: false,
+    table: { disable: true }
+  }
+}
 
 const meta = {
   title: 'Components/DataTable',
@@ -135,7 +143,8 @@ A altura é definida por uma classe Tailwind no componente, por exemplo \`class=
     },
     label: {
       control: 'text',
-      description: 'Nome acessível da tabela.'
+      description: 'Nome acessível da tabela.',
+      table: { defaultValue: { summary: 'Tabela de dados' } }
     },
     actionsLabel: {
       control: 'text',
@@ -144,7 +153,18 @@ A altura é definida por uma classe Tailwind no componente, por exemplo \`class=
     },
     emptyText: {
       control: 'text',
-      description: 'Mensagem exibida quando não há registros.'
+      description: 'Mensagem exibida quando não há registros.',
+      table: { defaultValue: { summary: 'Nenhum registro encontrado.' } }
+    },
+    loading: {
+      control: 'boolean',
+      description: 'Substitui os registros por linhas de skeleton enquanto os dados são carregados.',
+      table: { defaultValue: { summary: 'false' } }
+    },
+    loadingRows: {
+      control: { type: 'number', min: 1, step: 1 },
+      description: 'Quantidade de linhas de skeleton exibidas durante o carregamento.',
+      table: { defaultValue: { summary: '6' } }
     },
     scrollbarVisibility: {
       control: 'select',
@@ -172,6 +192,7 @@ A altura é definida por uma classe Tailwind no componente, por exemplo \`class=
       description: 'Substitui o conteúdo do estado vazio.',
       table: { category: 'Slots', type: { summary: 'Vue slot' } }
     },
+    ...hiddenGeneratedArgTypes,
     'onUpdate:modelValue': {
       action: 'update:modelValue',
       description: 'Evento emitido quando a seleção muda.'
@@ -192,7 +213,7 @@ A altura é definida por uma classe Tailwind no componente, por exemplo \`class=
   args: {
     columns: [...columns],
     rows,
-    modelValue: [],
+    modelValue: [1, 2],
     rowKey: 'id',
     selectable: true,
     disabledRowKeys: [4],
@@ -203,12 +224,14 @@ A altura é definida por uma classe Tailwind no componente, por exemplo \`class=
     label: 'Pedidos da operação',
     actionsLabel: 'Ações',
     emptyText: 'Nenhum pedido encontrado.',
+    loading: false,
+    loadingRows: 6,
     scrollbarVisibility: 'auto'
   },
   render: (args) => ({
     components: { Badge, Button, DataTable, EllipsisIcon },
     setup() {
-      const selection = ref<(string | number)[]>([1, 2])
+      const selection = ref<(string | number)[]>([...(args.modelValue ?? [])])
       watch(() => args.modelValue, value => selection.value = [...(value ?? [])])
       return { args, selection, statusVariants }
     },
@@ -237,14 +260,19 @@ A altura é definida por uma classe Tailwind no componente, por exemplo \`class=
             :label="args.label"
             :actions-label="args.actionsLabel"
             :empty-text="args.emptyText"
+            :loading="args.loading"
+            :loading-rows="args.loadingRows"
             :scrollbar-visibility="args.scrollbarVisibility"
           class="size-full"
           @update:model-value="args['onUpdate:modelValue']"
           @update:sort-key="args['onUpdate:sortKey']"
           @update:sort-direction="args['onUpdate:sortDirection']"
           @sort="args.onSort">
-            <template #cell-order="{ value }">
-              <span class="font-semibold text-slate-900">{{ value }}</span>
+            <template #cell-order="{ row, value }">
+              <div class="flex flex-col gap-0.5">
+                <span class="font-semibold text-slate-900">{{ value }}</span>
+                <span class="text-xs text-slate-500">{{ row.orderTime }}</span>
+              </div>
             </template>
 
             <template #cell-status="{ value }">
@@ -261,9 +289,8 @@ A altura é definida por uma classe Tailwind no componente, por exemplo \`class=
               </Button>
             </template>
 
-            <template #row-detail="{ row }">
+            <template #row-detail>
               <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
-                <span class="text-sm font-medium text-slate-700">Informações relacionadas ao {{ row.order }}</span>
                 <span class="text-xs text-slate-500">Observação: confirmar o complemento do endereço antes da saída.</span>
               </div>
             </template>
@@ -296,6 +323,21 @@ export const Empty: Story = {
     docs: {
       description: {
         story: 'O estado vazio ocupa toda a largura disponível e preserva o cabeçalho da tabela.'
+      }
+    }
+  }
+}
+
+export const Loading: Story = {
+  args: {
+    loading: true,
+    loadingRows: 6,
+    modelValue: []
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'O skeleton preserva o cabeçalho e a largura das colunas enquanto os registros são carregados.'
       }
     }
   }

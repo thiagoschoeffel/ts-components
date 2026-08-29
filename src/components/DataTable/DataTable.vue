@@ -53,6 +53,10 @@ const props = withDefaults(
     actionsLabel?: string
     /** Message displayed when there are no records. */
     emptyText?: string
+    /** Replaces the records with skeleton rows while data is being fetched. */
+    loading?: boolean
+    /** Number of skeleton rows displayed during loading. */
+    loadingRows?: number
     /** Controls when the custom scrollbars are shown. */
     scrollbarVisibility?: 'auto' | 'always' | 'scroll' | 'hover' | 'glimpse'
   }>(),
@@ -68,6 +72,8 @@ const props = withDefaults(
     label: 'Tabela de dados',
     actionsLabel: 'Ações',
     emptyText: 'Nenhum registro encontrado.',
+    loading: false,
+    loadingRows: 6,
     scrollbarVisibility: 'auto'
   }
 )
@@ -111,6 +117,7 @@ const disabledKeys = computed(() => new Set(props.disabledRowKeys))
 const expandedKeys = computed(() => new Set(props.expandedRowKeys))
 const activeSortKey = ref<string | undefined>(props.sortKey)
 const activeSortDirection = ref<DataTableSortDirection | undefined>(props.sortDirection)
+const skeletonRows = computed(() => Math.max(1, Math.floor(props.loadingRows)))
 
 watch(() => props.sortKey, value => activeSortKey.value = value)
 watch(() => props.sortDirection, value => activeSortDirection.value = value)
@@ -218,6 +225,9 @@ function getSortActionLabel(column: DataTableColumn) {
 }
 
 function toggleSort(column: DataTableColumn) {
+  if (props.loading)
+    return
+
   let nextKey: string | undefined = column.key
   let nextDirection: DataTableSortDirection | undefined = 'asc'
 
@@ -311,12 +321,17 @@ watch(
   <div
     ref="rootElement"
     class="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+    <span v-if="props.loading" class="sr-only" role="status" aria-live="polite">
+      Carregando dados da tabela
+    </span>
     <ScrollArea
       orientation="both"
       :scrollbar-visibility="props.scrollbarVisibility"
       class="min-h-0 flex-1"
       @scroll="handleScroll">
-      <table class="w-full min-w-max border-separate border-spacing-0 text-sm text-slate-700">
+      <table
+        class="w-full min-w-max border-separate border-spacing-0 text-sm text-slate-700"
+        :aria-busy="props.loading">
         <caption class="sr-only">{{ props.label }}</caption>
         <thead>
           <tr>
@@ -326,7 +341,7 @@ watch(
               class="sticky top-0 z-20 w-14 min-w-14 border-b border-slate-200 bg-slate-50 px-4 py-3 text-left">
               <Checkbox
                 :model-value="bulkSelectionState"
-                :disabled="selectableKeys.length === 0"
+                :disabled="props.loading || selectableKeys.length === 0"
                 size="small"
                 aria-label="Selecionar todos os registros"
                 @update:model-value="toggleAll" />
@@ -345,21 +360,22 @@ watch(
               <button
                 v-if="column.sortable"
                 type="button"
-                class="group/sort flex w-full cursor-pointer appearance-none items-center gap-1.5 rounded-sm border-0 bg-transparent p-0 font-[inherit] leading-[inherit] text-[inherit] uppercase tracking-[inherit] outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40"
+                class="group/sort flex w-full appearance-none items-center gap-1.5 rounded-sm border-0 bg-transparent p-0 font-[inherit] leading-[inherit] text-[inherit] uppercase tracking-[inherit] outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 disabled:cursor-wait"
                 :class="justifyClasses[column.align ?? 'left']"
                 :aria-label="getSortActionLabel(column)"
+                :disabled="props.loading"
                 @click="toggleSort(column)">
                 <span>{{ column.label }}</span>
                 <ArrowDownWideNarrowIcon
                   v-if="isSortedBy(column.key, 'desc')"
-                  class="size-3.5 shrink-0 text-blue-600"
+                  class="size-3.5 shrink-0 text-slate-800"
                   aria-hidden="true" />
                 <ArrowUpNarrowWideIcon
                   v-else
                   class="size-3.5 shrink-0 transition-opacity"
                   :class="isSortedBy(column.key, 'asc')
-                    ? 'text-blue-600 opacity-100'
-                    : 'opacity-0 group-hover/sort:opacity-40 group-focus-visible/sort:opacity-40'"
+                    ? 'text-slate-800 opacity-100'
+                    : 'text-slate-400 opacity-0 group-hover/sort:opacity-100 group-focus-visible/sort:opacity-100'"
                   aria-hidden="true" />
               </button>
               <template v-else>{{ column.label }}</template>
@@ -378,7 +394,42 @@ watch(
           </tr>
         </thead>
 
-        <tbody v-if="displayedRows.length">
+        <tbody v-if="props.loading" aria-hidden="true">
+          <tr
+            v-for="rowIndex in skeletonRows"
+            :key="`skeleton-${rowIndex}`">
+            <td
+              v-if="props.selectable"
+              class="border-b border-slate-100 bg-white px-4 py-3 align-middle">
+              <div class="size-4 animate-pulse rounded bg-slate-200" />
+            </td>
+
+            <td
+              v-for="(column, columnIndex) in props.columns"
+              :key="column.key"
+              class="border-b border-slate-100 bg-white px-4 py-3 align-middle"
+              :class="[
+                columnSizeClasses[column.size ?? 'medium'],
+                alignClasses[column.align ?? 'left']
+              ]">
+              <div
+                class="h-4 animate-pulse rounded bg-slate-200"
+                :class="[
+                  columnIndex % 3 === 0 ? 'w-2/3' : columnIndex % 3 === 1 ? 'w-5/6' : 'w-1/2',
+                  column.align === 'right' ? 'ml-auto' : column.align === 'center' ? 'mx-auto' : ''
+                ]" />
+            </td>
+
+            <td
+              v-if="hasActions"
+              class="sticky right-0 z-20 w-px border-b border-l border-slate-100 bg-white py-2 pl-3 text-right align-middle"
+              :class="hasVerticalOverflow ? 'pr-8' : 'pr-3'">
+              <div class="ml-auto size-8 animate-pulse rounded-lg bg-slate-200" />
+            </td>
+          </tr>
+        </tbody>
+
+        <tbody v-else-if="displayedRows.length">
           <template
             v-for="(row, rowIndex) in displayedRows"
             :key="getRowKey(row)">

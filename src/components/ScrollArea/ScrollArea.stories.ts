@@ -47,6 +47,10 @@ const meta = {
       options: scrollbarVisibilities,
       description: 'Quando a barra de rolagem personalizada é mostrada.',
       table: { defaultValue: { summary: 'auto' } }
+    },
+    onScroll: {
+      action: 'scroll',
+      description: 'Evento emitido quando o viewport é rolado.'
     }
   },
   args: {

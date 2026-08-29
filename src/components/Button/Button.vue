@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { controlHeightClasses } from '../controlSize'
+
 type ButtonVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'danger'
 type ButtonSize = 'small' | 'medium' | 'large'
 
@@ -41,23 +43,24 @@ const variantClasses: Record<ButtonVariant, string> = {
 }
 
 const sizeClasses: Record<ButtonSize, string> = {
-  small: 'h-7 px-2.5 text-xs',
-  medium: 'h-9 px-3.5 text-sm',
-  large: 'h-11 px-4.5 text-base'
+  small: 'px-2.5 text-xs',
+  medium: 'px-3.5 text-sm',
+  large: 'px-4.5 text-base'
 }
 
 const iconOnlySizeClasses: Record<ButtonSize, string> = {
-  small: 'size-7 text-xs',
-  medium: 'size-9 text-sm',
-  large: 'size-11 text-base'
+  small: 'w-7 text-xs',
+  medium: 'w-9 text-sm',
+  large: 'w-11 text-base'
 }
 </script>
 
 <template>
   <button
-    class="inline-flex appearance-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border font-medium leading-none shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+    class="box-border inline-flex appearance-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border font-medium leading-none shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     :class="[
       variantClasses[props.variant],
+      controlHeightClasses[props.size],
       props.iconOnly ? iconOnlySizeClasses[props.size] : sizeClasses[props.size],
       props.loading
         ? 'cursor-wait opacity-50'

@@ -1,14 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { computed } from 'vue'
-import * as availableIcons from '../../icons'
+import {
+  getIconComponent,
+  iconControlOptions,
+  type IconControlName
+} from '../../iconControls'
 import PageHeader from './PageHeader.vue'
-
-type IconName = keyof typeof availableIcons | 'Nenhum'
 
 interface PageHeaderStoryArgs {
   title: string
   subtitle?: string
-  iconName: IconName
+  iconName: IconControlName
   icon?: unknown
 }
 
@@ -37,15 +39,15 @@ Cabeçalho padronizado para páginas. O ícone é opcional e deve ser fornecido 
   argTypes: {
     title: {
       control: 'text',
-      description: 'Main heading of the page.'
+      description: 'Título principal da página.'
     },
     subtitle: {
       control: 'text',
-      description: 'Supporting text displayed below the heading.'
+      description: 'Texto complementar exibido abaixo do título.'
     },
     iconName: {
       control: 'select',
-      options: ['Nenhum', ...Object.keys(availableIcons)],
+      options: iconControlOptions,
       description: 'Controle exclusivo do Storybook para experimentar os ícones.',
       table: { category: 'Storybook' }
     },
@@ -63,9 +65,7 @@ Cabeçalho padronizado para páginas. O ícone é opcional e deve ser fornecido 
   render: (args) => ({
     components: { PageHeader },
     setup() {
-      const selectedIcon = computed(() =>
-        args.iconName === 'Nenhum' ? null : availableIcons[args.iconName]
-      )
+      const selectedIcon = computed(() => getIconComponent(args.iconName))
 
       return { args, selectedIcon }
     },

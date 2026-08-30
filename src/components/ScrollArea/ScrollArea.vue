@@ -37,7 +37,7 @@ const contentWidthClasses: Record<ScrollAreaOrientation, string> = {
 
 <template>
   <ScrollAreaRoot
-    class="relative min-h-0 min-w-0 w-full overflow-hidden"
+    class="relative isolate min-h-0 min-w-0 w-full overflow-hidden"
     :type="props.scrollbarVisibility">
     <ScrollAreaViewport
       class="size-full rounded-[inherit]"

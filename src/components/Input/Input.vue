@@ -224,7 +224,7 @@ defineExpose({
       <span v-if="props.required" class="text-red-500" aria-hidden="true"> *</span>
     </label>
 
-    <div class="flex min-w-0">
+    <div class="flex isolate min-w-0">
       <div class="relative min-w-0 flex-1 focus-within:z-10">
       <span
         v-if="$slots.leading"

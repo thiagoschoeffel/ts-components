@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import { CalendarDaysIcon, SettingsIcon } from '../../icons'
 import Button from '../Button/Button.vue'
 import Input from '../Input/Input.vue'
+import ScrollArea from '../ScrollArea/ScrollArea.vue'
 import Drawer from './Drawer.vue'
 
 const sides = ['top', 'right', 'bottom', 'left'] as const
@@ -333,6 +334,48 @@ export const FormWithFooter: Story = {
     docs: {
       description: {
         story: 'O rodapé permanece fixo enquanto somente o conteúdo central recebe rolagem.'
+      }
+    }
+  }
+}
+
+export const OverScrollableContent: Story = {
+  render: () => ({
+    components: { Button, Drawer, ScrollArea },
+    template: `
+      <div class="w-[min(42rem,calc(100vw-3rem))]">
+        <ScrollArea
+          orientation="both"
+          scrollbar-visibility="always"
+          class="h-64 rounded-lg border border-slate-200 bg-white">
+          <div class="grid w-[54rem] grid-cols-4 gap-3 p-4">
+            <div
+              v-for="item in 24"
+              :key="item"
+              class="rounded-lg bg-slate-50 px-4 py-5 text-sm text-slate-600">
+              Pedido {{ String(item).padStart(2, '0') }}
+            </div>
+          </div>
+        </ScrollArea>
+
+        <Drawer
+          default-open
+          side="left"
+          size="small"
+          title="Camadas da interface"
+          description="O backdrop e o painel permanecem acima das barras de rolagem.">
+          <template #trigger>
+            <Button class="mt-4" variant="secondary">Verificar camadas</Button>
+          </template>
+          <p>As barras pertencem somente ao contexto local da área rolável.</p>
+        </Drawer>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Regressão visual da hierarquia de camadas: barras de rolagem locais ficam sob o backdrop e o painel modal.'
       }
     }
   }

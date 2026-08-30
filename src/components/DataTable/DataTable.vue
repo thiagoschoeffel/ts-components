@@ -338,7 +338,7 @@ watch(
             <th
               v-if="props.selectable"
               scope="col"
-              class="sticky top-0 z-20 w-14 min-w-14 border-b border-slate-200 bg-slate-50 px-4 py-3 text-left">
+              class="sticky top-0 z-[1] w-14 min-w-14 border-b border-slate-200 bg-slate-50 px-4 py-3 text-left">
               <Checkbox
                 :model-value="bulkSelectionState"
                 :disabled="props.loading || selectableKeys.length === 0"
@@ -351,7 +351,7 @@ watch(
               v-for="column in props.columns"
               :key="column.key"
               scope="col"
-              class="sticky top-0 z-10 border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-600"
+              class="sticky top-0 z-[1] border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-600"
               :aria-sort="getSortAriaValue(column)"
               :class="[
                 columnSizeClasses[column.size ?? 'medium'],
@@ -384,7 +384,7 @@ watch(
             <th
               v-if="hasActions"
               scope="col"
-              class="sticky top-0 right-0 z-30 w-px whitespace-nowrap border-b border-l border-slate-200 bg-slate-50 py-3 pl-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-600"
+              class="sticky top-0 right-0 z-[3] w-px whitespace-nowrap border-b border-l border-slate-200 bg-slate-50 py-3 pl-3 text-right text-xs font-semibold uppercase tracking-wide text-slate-600"
               :class="[
                 hasVerticalOverflow ? 'pr-8' : 'pr-3',
                 hasContentAfterActions ? 'before:pointer-events-none before:absolute before:inset-y-0 before:-left-3 before:w-3 before:bg-gradient-to-r before:from-transparent before:to-slate-300/35 before:content-[\'\']' : ''
@@ -422,7 +422,7 @@ watch(
 
             <td
               v-if="hasActions"
-              class="sticky right-0 z-20 w-px border-b border-l border-slate-100 bg-white py-2 pl-3 text-right align-middle"
+              class="sticky right-0 z-[2] w-px border-b border-l border-slate-100 bg-white py-2 pl-3 text-right align-middle"
               :class="hasVerticalOverflow ? 'pr-8' : 'pr-3'">
               <div class="ml-auto size-8 animate-pulse rounded-lg bg-slate-200" />
             </td>
@@ -472,7 +472,7 @@ watch(
 
             <td
               v-if="hasActions"
-              class="sticky right-0 z-20 w-px whitespace-nowrap border-b border-l border-slate-100 bg-white py-2 pl-3 text-right align-middle group-hover:bg-slate-50"
+              class="sticky right-0 z-[2] w-px whitespace-nowrap border-b border-l border-slate-100 bg-white py-2 pl-3 text-right align-middle group-hover:bg-slate-50"
               :class="[
                 hasVerticalOverflow ? 'pr-8' : 'pr-3',
                 hasContentAfterActions ? 'before:pointer-events-none before:absolute before:inset-y-0 before:-left-3 before:w-3 before:bg-gradient-to-r before:from-transparent before:to-slate-300/35 before:content-[\'\']' : ''
@@ -498,7 +498,7 @@ watch(
             </td>
             <td
               v-if="hasActions"
-              class="sticky right-0 z-20 w-px whitespace-nowrap border-b border-l border-slate-100 bg-slate-50 py-2 pl-3"
+              class="sticky right-0 z-[2] w-px whitespace-nowrap border-b border-l border-slate-100 bg-slate-50 py-2 pl-3"
               :class="[
                 hasVerticalOverflow ? 'pr-8' : 'pr-3',
                 hasContentAfterActions ? 'before:pointer-events-none before:absolute before:inset-y-0 before:-left-3 before:w-3 before:bg-gradient-to-r before:from-transparent before:to-slate-300/35 before:content-[\'\']' : ''

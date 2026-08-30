@@ -54,7 +54,7 @@ const meta = {
     docs: {
       description: {
         component: `
-Navegação entre painéis baseada no Tabs do Reka UI, com visual compacto, navegação por teclado e orientação horizontal ou vertical.
+Navegação entre painéis baseada no Tabs do Reka UI, com visual compacto, navegação por teclado e orientação horizontal ou vertical. Quando as abas horizontais excedem a largura disponível, elas usam o ScrollArea para rolagem horizontal consistente.
 
 Quando \`modelValue\` e \`defaultValue\` não são informados, a primeira aba habilitada é selecionada. Use o slot \`content\` para renderizar o painel correspondente a cada item.
 
@@ -227,6 +227,23 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Playground: Story = {}
+
+export const HorizontalScroll: Story = {
+  decorators: [
+    () => ({ template: '<div class="w-80"><story /></div>' })
+  ],
+  args: {
+    tabs: [
+      { value: 'all', label: 'Todos' },
+      { value: 'review', label: 'Aguardando revisão' },
+      { value: 'open', label: 'Abertos' },
+      { value: 'progress', label: 'Em andamento' },
+      { value: 'done', label: 'Concluídos' },
+      { value: 'issues', label: 'Problemas' }
+    ],
+    modelValue: 'all'
+  }
+}
 
 export const Sizes: Story = {
   render: () => ({

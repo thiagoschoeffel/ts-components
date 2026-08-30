@@ -40,6 +40,7 @@ export interface TabsProps {
 import { computed } from "vue";
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from "reka-ui";
 import { controlHeightClasses } from "../controlSize";
+import ScrollArea from "../ScrollArea/ScrollArea.vue";
 
 const props = withDefaults(defineProps<TabsProps>(), {
   modelValue: undefined,
@@ -114,60 +115,74 @@ function updateValue(value: string | number) {
     "
     @update:model-value="updateValue"
   >
-    <TabsList
-      :aria-label="props.ariaLabel"
-      :loop="props.loop"
-      class="min-w-0"
-      :class="
-        props.orientation === 'vertical'
-          ? props.fullWidth
-            ? 'flex w-full flex-col'
-            : 'flex w-44 shrink-0 flex-col'
-          : props.fullWidth
-            ? 'flex w-full'
-            : 'inline-flex max-w-full overflow-x-auto'
-      "
-    >
-      <TabsTrigger
-        v-for="tab in props.tabs"
-        :key="tab.value"
-        :value="tab.value"
-        :disabled="tab.disabled"
-        class="inline-flex shrink-0 cursor-pointer appearance-none items-center gap-2 whitespace-nowrap rounded-lg border border-transparent bg-transparent font-medium text-slate-400 outline-none transition-[color,background-color,box-shadow] duration-150 focus-visible:ring-2 data-[state=active]:hover:brightness-105 data-[state=active]:hover:shadow-md data-[state=inactive]:hover:text-slate-800 disabled:cursor-not-allowed disabled:bg-transparent disabled:!text-slate-200 disabled:shadow-none disabled:hover:bg-transparent disabled:hover:!text-slate-200"
-        :class="[
-          controlHeightClasses[props.size],
-          triggerSizeClasses[props.size],
-          activeVariantClasses[props.variant],
+    <ScrollArea
+      :orientation="props.orientation === 'vertical' ? 'vertical' : 'horizontal'"
+      scrollbar-visibility="auto"
+      :class="[
+        'max-w-full',
+        props.orientation === 'horizontal'
+          ? 'pb-2.5 [&_[data-reka-scroll-area-viewport]]:!h-auto'
+          : ''
+      ]">
+      <TabsList
+        :aria-label="props.ariaLabel"
+        :loop="props.loop"
+        class="min-w-0"
+        :class="
           props.orientation === 'vertical'
-            ? 'w-full justify-start'
+            ? props.fullWidth
+              ? 'flex w-full flex-col'
+              : 'flex w-44 shrink-0 flex-col'
             : props.fullWidth
-              ? 'min-w-0 flex-1 !shrink justify-center overflow-hidden'
-              : 'justify-center',
-        ]"
+              ? 'flex w-full'
+              : 'inline-flex'
+        "
       >
-        <span
-          v-if="$slots.icon"
-          class="inline-flex shrink-0 items-center justify-center"
-          :class="iconSizeClasses[props.size]"
-          aria-hidden="true"
+        <TabsTrigger
+          v-for="tab in props.tabs"
+          :key="tab.value"
+          :value="tab.value"
+          :disabled="tab.disabled"
+          class="inline-flex shrink-0 cursor-pointer appearance-none items-center gap-2 whitespace-nowrap rounded-lg border border-transparent bg-transparent font-medium text-slate-400 outline-none transition-[color,background-color,box-shadow] duration-150 focus-visible:ring-2 data-[state=active]:hover:brightness-105 data-[state=active]:hover:shadow-md data-[state=inactive]:hover:text-slate-800 disabled:cursor-not-allowed disabled:bg-transparent disabled:!text-slate-200 disabled:shadow-none disabled:hover:bg-transparent disabled:hover:!text-slate-200"
+          :class="[
+            controlHeightClasses[props.size],
+            triggerSizeClasses[props.size],
+            activeVariantClasses[props.variant],
+            props.orientation === 'vertical'
+              ? 'w-full justify-start'
+              : props.fullWidth
+                ? 'min-w-0 flex-1 !shrink justify-center overflow-hidden'
+                : 'justify-center',
+          ]"
         >
-          <slot name="icon" :tab="tab" :active="activeValue === tab.value" />
-        </span>
+          <span
+            v-if="$slots.icon"
+            class="inline-flex shrink-0 items-center justify-center"
+            :class="iconSizeClasses[props.size]"
+            aria-hidden="true"
+          >
+            <slot name="icon" :tab="tab" :active="activeValue === tab.value" />
+          </span>
 
-        <slot name="tab" :tab="tab" :active="activeValue === tab.value">
-          <span class="min-w-0 truncate">{{ tab.label }}</span>
-        </slot>
+          <slot name="tab" :tab="tab" :active="activeValue === tab.value">
+            <span class="min-w-0 truncate">{{ tab.label }}</span>
+          </slot>
 
-        <span v-if="$slots.badge" class="inline-flex shrink-0 items-center">
-          <slot name="badge" :tab="tab" :active="activeValue === tab.value" />
-        </span>
-      </TabsTrigger>
-    </TabsList>
+          <span v-if="$slots.badge" class="inline-flex shrink-0 items-center">
+            <slot name="badge" :tab="tab" :active="activeValue === tab.value" />
+          </span>
+        </TabsTrigger>
+      </TabsList>
+    </ScrollArea>
 
     <div
       class="min-w-0"
       :class="
-        props.orientation === 'vertical' && !props.fullWidth ? 'flex-1' : 'mt-4'
+        props.orientation === 'vertical' && !props.fullWidth
+          ? 'flex-1'
+          : props.orientation === 'horizontal'
+            ? 'mt-1.5'
+            : 'mt-4'
       "
     >
       <TabsContent

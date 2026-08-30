@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import Badge from './Badge.vue'
 
 const variants = ['neutral', 'info', 'success', 'warning', 'danger'] as const
-const sizes = ['small', 'medium'] as const
+const sizes = ['small', 'medium', 'large'] as const
 
 const meta = {
   title: 'Components/Badge',
@@ -42,7 +42,7 @@ Indicador compacto para estados, quantidades ou classificações.
   },
   args: {
     variant: 'warning',
-    size: 'small'
+    size: 'medium'
   },
   render: (args) => ({
     components: { Badge },

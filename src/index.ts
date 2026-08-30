@@ -57,6 +57,7 @@ export {
 } from './icons'
 
 export { Avatar, Badge, Button, Card, Checkbox, Chips, DataTable, Drawer, DropdownMenu, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, Select, Tabs }
+export type { BadgeSize, BadgeVariant } from './components/Badge/Badge.vue'
 export type { ChipsProps, ChipsSize, ChipsVariant } from './components/Chips/Chips.vue'
 export type {
   DataTableColumn,

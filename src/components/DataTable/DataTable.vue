@@ -472,7 +472,7 @@ watch(
 
             <td
               v-if="hasActions"
-              class="sticky right-0 z-20 w-px whitespace-nowrap border-b border-l border-slate-100 bg-white py-2 pl-3 text-right align-middle transition-colors group-hover:bg-slate-50"
+              class="sticky right-0 z-20 w-px whitespace-nowrap border-b border-l border-slate-100 bg-white py-2 pl-3 text-right align-middle group-hover:bg-slate-50"
               :class="[
                 hasVerticalOverflow ? 'pr-8' : 'pr-3',
                 hasContentAfterActions ? 'before:pointer-events-none before:absolute before:inset-y-0 before:-left-3 before:w-3 before:bg-gradient-to-r before:from-transparent before:to-slate-300/35 before:content-[\'\']' : ''

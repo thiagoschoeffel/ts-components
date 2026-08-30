@@ -1,6 +1,6 @@
 <script setup lang="ts">
-type BadgeVariant = 'neutral' | 'info' | 'success' | 'warning' | 'danger'
-type BadgeSize = 'small' | 'medium'
+export type BadgeVariant = 'neutral' | 'info' | 'success' | 'warning' | 'danger'
+export type BadgeSize = 'small' | 'medium' | 'large'
 
 const props = withDefaults(
   defineProps<{
@@ -24,8 +24,9 @@ const variantClasses: Record<BadgeVariant, string> = {
 }
 
 const sizeClasses: Record<BadgeSize, string> = {
-  small: 'px-2.5 py-1 text-xs',
-  medium: 'px-3 py-1.5 text-sm'
+  small: 'px-2 py-0.5 text-[0.6875rem]',
+  medium: 'px-2.5 py-1 text-xs',
+  large: 'px-3 py-1.5 text-sm'
 }
 </script>
 

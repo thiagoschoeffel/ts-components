@@ -62,7 +62,7 @@ function forwardSelect(value: string, item: DropdownMenuActionItem, event: Event
       <DropdownMenuSubContent
         :side-offset="4"
         :align-offset="-4"
-        class="z-50 max-h-[var(--reka-dropdown-menu-content-available-height)] min-w-48 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-sm outline-none">
+        class="z-50 max-h-[var(--reka-dropdown-menu-content-available-height)] min-w-48 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-xs outline-none">
         <DropdownMenuItems
           :items="entry.items"
           @select="forwardSelect">

@@ -213,7 +213,7 @@ Quando \`modelValue\` e \`defaultValue\` não são informados, a primeira aba ha
           <component :is="selectedIcon" />
         </template>
         <template #content="{ tab }">
-          <div class="rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="rounded-lg border border-slate-200 bg-white p-5 shadow-xs">
             <p class="text-sm font-medium text-slate-800">{{ tab.label }}</p>
             <p class="mt-1 text-sm leading-relaxed text-slate-500">{{ descriptions[tab.value] }}</p>
           </div>
@@ -333,7 +333,7 @@ export const Vertical: Story = {
         :unmount-on-hide="args.unmountOnHide"
         aria-label="Configurações da conta">
         <template #content="{ tab }">
-          <div class="min-h-40 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
+          <div class="min-h-40 rounded-lg border border-slate-200 bg-white p-5 shadow-xs">
             <p class="text-sm font-medium text-slate-800">{{ tab.label }}</p>
             <p class="mt-1 text-sm leading-relaxed text-slate-500">{{ descriptions[tab.value] }}</p>
           </div>

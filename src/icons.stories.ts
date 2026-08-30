@@ -50,7 +50,7 @@ export const Gallery: Story = {
         <article
           v-for="icon in icons"
           :key="icon.name"
-          class="flex min-h-28 flex-col items-center justify-center gap-3 rounded-lg border border-slate-200 bg-white p-4 text-slate-800 shadow-sm">
+          class="flex min-h-28 flex-col items-center justify-center gap-3 rounded-lg border border-slate-200 bg-white p-4 text-slate-800 shadow-xs">
           <component
             :is="icon.component"
             :size="args.size"

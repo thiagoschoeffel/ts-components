@@ -258,7 +258,7 @@ defineExpose({
         :aria-label="props.ariaLabel"
         :aria-invalid="isInvalid"
         :aria-describedby="describedBy"
-        class="box-border block min-w-0 w-full appearance-none rounded-lg border bg-white text-slate-800 shadow-sm outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-300 read-only:bg-slate-50 read-only:text-slate-500"
+        class="box-border block min-w-0 w-full appearance-none rounded-lg border bg-white text-slate-800 shadow-xs outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-slate-400 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-300 read-only:bg-slate-50 read-only:text-slate-500"
         :class="[
           sizeClasses[props.size],
           controlHeightClasses[props.size],

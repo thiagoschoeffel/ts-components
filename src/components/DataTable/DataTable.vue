@@ -320,7 +320,7 @@ watch(
 <template>
   <div
     ref="rootElement"
-    class="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+    class="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs">
     <span v-if="props.loading" class="sr-only" role="status" aria-live="polite">
       Carregando dados da tabela
     </span>

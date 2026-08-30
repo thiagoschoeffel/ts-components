@@ -165,7 +165,7 @@ function optionStateClasses(option: SelectOption) {
         :aria-label="props.ariaLabel"
         :aria-invalid="isInvalid"
         :aria-describedby="describedBy"
-        class="box-border inline-flex w-full min-w-0 cursor-pointer items-center justify-between gap-2 rounded-lg border bg-white text-left text-slate-800 shadow-sm outline-none transition-[border-color,box-shadow,background-color] duration-150 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-300"
+        class="box-border inline-flex w-full min-w-0 cursor-pointer items-center justify-between gap-2 rounded-lg border bg-white text-left text-slate-800 shadow-xs outline-none transition-[border-color,box-shadow,background-color] duration-150 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-300"
         :class="[
           controlHeightClasses[props.size],
           triggerSizeClasses[props.size],
@@ -194,7 +194,7 @@ function optionStateClasses(option: SelectOption) {
           align="start"
           :side-offset="6"
           :style="{ width: 'var(--reka-select-trigger-width)' }"
-          class="z-50 max-h-[var(--reka-select-content-available-height)] overflow-hidden rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-sm outline-none">
+          class="z-50 max-h-[var(--reka-select-content-available-height)] overflow-hidden rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-xs outline-none">
           <SelectScrollUpButton class="flex h-6 cursor-default items-center justify-center text-slate-400">
             <ChevronUpIcon class="size-4" aria-hidden="true" />
           </SelectScrollUpButton>

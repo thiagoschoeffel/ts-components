@@ -114,7 +114,7 @@ const contentStyle = computed(() => ({
           :avoid-collisions="props.avoidCollisions"
           :collision-padding="props.collisionPadding"
           :style="contentStyle"
-          class="z-50 max-h-[var(--reka-popover-content-available-height)] w-[min(var(--ts-popover-width),calc(100vw-2rem))] overflow-y-auto rounded-xl border border-slate-200 bg-white text-sm text-slate-600 shadow-sm outline-none focus-visible:ring-2 focus-visible:ring-slate-500/40">
+          class="z-50 max-h-[var(--reka-popover-content-available-height)] w-[min(var(--ts-popover-width),calc(100vw-2rem))] overflow-y-auto rounded-xl border border-slate-200 bg-white text-sm text-slate-600 shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-slate-500/40">
           <header
             v-if="$slots.header || props.title || props.description || props.showClose"
             class="flex items-start gap-3 border-b border-slate-200 px-4 py-3">

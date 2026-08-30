@@ -114,7 +114,7 @@ function forwardSelect(value: string, item: DropdownMenuActionItem, event: Event
         <slot name="trigger" :open="open">
           <button
             type="button"
-            class="inline-flex size-9 cursor-pointer appearance-none items-center justify-center rounded-lg border border-slate-300 bg-gradient-to-b from-white to-slate-100 text-slate-700 shadow-sm outline-none transition-[filter,transform,box-shadow] duration-150 hover:brightness-105 hover:shadow-md focus-visible:ring-2 focus-visible:ring-slate-500/40 focus-visible:ring-offset-2 active:translate-y-px active:brightness-95 active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
+            class="inline-flex size-9 cursor-pointer appearance-none items-center justify-center rounded-lg border border-slate-300 bg-gradient-to-b from-white to-slate-100 text-slate-700 shadow-xs outline-none transition-[filter,transform,box-shadow] duration-150 hover:brightness-105 hover:shadow-md focus-visible:ring-2 focus-visible:ring-slate-500/40 focus-visible:ring-offset-2 active:translate-y-px active:brightness-95 active:shadow-none disabled:cursor-not-allowed disabled:opacity-50"
             :aria-label="props.triggerLabel">
             <EllipsisIcon class="size-4" aria-hidden="true" />
           </button>
@@ -127,7 +127,7 @@ function forwardSelect(value: string, item: DropdownMenuActionItem, event: Event
           :align="props.align"
           :side-offset="props.sideOffset"
           :loop="props.loop"
-          class="z-50 max-h-[var(--reka-dropdown-menu-content-available-height)] min-w-48 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-sm outline-none">
+          class="z-50 max-h-[var(--reka-dropdown-menu-content-available-height)] min-w-48 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-xs outline-none">
           <DropdownMenuItems
             :items="props.items"
             @select="forwardSelect">

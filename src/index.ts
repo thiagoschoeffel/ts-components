@@ -5,6 +5,7 @@ import Badge from './components/Badge/Badge.vue'
 import Button from './components/Button/Button.vue'
 import Card from './components/Card/Card.vue'
 import Checkbox from './components/Checkbox/Checkbox.vue'
+import Chips from './components/Chips/Chips.vue'
 import DataTable from './components/DataTable/DataTable.vue'
 import Drawer from './components/Drawer/Drawer.vue'
 import DropdownMenu from './components/DropdownMenu/DropdownMenu.vue'
@@ -55,7 +56,8 @@ export {
   XIcon
 } from './icons'
 
-export { Avatar, Badge, Button, Card, Checkbox, DataTable, Drawer, DropdownMenu, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, Select, Tabs }
+export { Avatar, Badge, Button, Card, Checkbox, Chips, DataTable, Drawer, DropdownMenu, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, Select, Tabs }
+export type { ChipsProps, ChipsSize, ChipsVariant } from './components/Chips/Chips.vue'
 export type {
   DataTableColumn,
   DataTableKey,
@@ -94,6 +96,7 @@ export default {
     app.component('Badge', Badge)
     app.component('Card', Card)
     app.component('Checkbox', Checkbox)
+    app.component('Chips', Chips)
     app.component('DataTable', DataTable)
     app.component('Drawer', Drawer)
     app.component('DropdownMenu', DropdownMenu)

@@ -88,9 +88,9 @@ const iconSizeClasses: Record<TabsSize, string> = {
 
 const activeVariantClasses: Record<TabsVariant, string> = {
   primary:
-    "data-[state=active]:bg-gradient-to-b data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-sm focus-visible:ring-blue-500/40",
+    "data-[state=active]:border-blue-700 data-[state=active]:bg-gradient-to-b data-[state=active]:from-blue-500 data-[state=active]:to-blue-600 data-[state=active]:text-white data-[state=active]:shadow-xs focus-visible:ring-blue-500/40",
   secondary:
-    "data-[state=active]:bg-white data-[state=active]:text-slate-800 data-[state=active]:shadow-sm focus-visible:ring-slate-500/40",
+    "data-[state=active]:border-slate-300 data-[state=active]:bg-gradient-to-b data-[state=active]:from-white data-[state=active]:to-slate-100 data-[state=active]:text-slate-900 data-[state=active]:shadow-xs focus-visible:ring-slate-500/40",
 };
 
 function updateValue(value: string | number) {
@@ -117,7 +117,7 @@ function updateValue(value: string | number) {
     <TabsList
       :aria-label="props.ariaLabel"
       :loop="props.loop"
-      class="rounded-lg border border-slate-200 bg-slate-50 p-1 shadow-sm"
+      class="min-w-0"
       :class="
         props.orientation === 'vertical'
           ? props.fullWidth
@@ -133,7 +133,7 @@ function updateValue(value: string | number) {
         :key="tab.value"
         :value="tab.value"
         :disabled="tab.disabled"
-        class="inline-flex shrink-0 cursor-pointer appearance-none items-center gap-2 whitespace-nowrap rounded-md border-0 bg-transparent font-medium text-slate-400 outline-none transition-[color,background-color,box-shadow] duration-150 focus-visible:ring-2 data-[state=inactive]:hover:text-slate-800 disabled:cursor-not-allowed disabled:bg-transparent disabled:!text-slate-200 disabled:shadow-none disabled:hover:bg-transparent disabled:hover:!text-slate-200"
+        class="inline-flex shrink-0 cursor-pointer appearance-none items-center gap-2 whitespace-nowrap rounded-lg border border-transparent bg-transparent font-medium text-slate-400 outline-none transition-[color,background-color,box-shadow] duration-150 focus-visible:ring-2 data-[state=active]:hover:brightness-105 data-[state=active]:hover:shadow-md data-[state=inactive]:hover:text-slate-800 disabled:cursor-not-allowed disabled:bg-transparent disabled:!text-slate-200 disabled:shadow-none disabled:hover:bg-transparent disabled:hover:!text-slate-200"
         :class="[
           controlHeightClasses[props.size],
           triggerSizeClasses[props.size],

@@ -60,7 +60,7 @@ const iconSizeClasses: Record<PaginationSize, string> = {
   large: 'size-5'
 }
 
-const controlClasses = 'inline-flex shrink-0 appearance-none items-center justify-center rounded-lg border border-slate-300 bg-gradient-to-b from-white to-slate-100 font-medium text-slate-700 shadow-sm outline-none transition-[filter,transform,box-shadow] duration-150 focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 enabled:cursor-pointer enabled:hover:brightness-[1.03] enabled:hover:shadow-md enabled:active:translate-y-px enabled:active:brightness-95 enabled:active:shadow-none disabled:cursor-not-allowed disabled:opacity-45'
+const controlClasses = 'inline-flex shrink-0 appearance-none items-center justify-center rounded-lg border border-slate-300 bg-gradient-to-b from-white to-slate-100 font-medium text-slate-700 shadow-xs outline-none transition-[filter,transform,box-shadow] duration-150 focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 enabled:cursor-pointer enabled:hover:brightness-[1.03] enabled:hover:shadow-md enabled:active:translate-y-px enabled:active:brightness-95 enabled:active:shadow-none disabled:cursor-not-allowed disabled:opacity-45'
 </script>
 
 <template>

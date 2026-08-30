@@ -57,7 +57,7 @@ const iconOnlySizeClasses: Record<ButtonSize, string> = {
 
 <template>
   <button
-    class="box-border inline-flex appearance-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border font-medium leading-none shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+    class="box-border inline-flex appearance-none items-center justify-center gap-2 whitespace-nowrap rounded-lg border font-medium leading-none shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
     :class="[
       variantClasses[props.variant],
       controlHeightClasses[props.size],

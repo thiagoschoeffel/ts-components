@@ -10,6 +10,8 @@ import Checkbox from './components/Checkbox/Checkbox.vue'
 import Chips from './components/Chips/Chips.vue'
 import Combobox from './components/Combobox/Combobox.vue'
 import DataTable from './components/DataTable/DataTable.vue'
+import DatePicker from './components/DatePicker/DatePicker.vue'
+import DateRangePicker from './components/DateRangePicker/DateRangePicker.vue'
 import Drawer from './components/Drawer/Drawer.vue'
 import EmptyState from './components/EmptyState/EmptyState.vue'
 import DropdownMenu from './components/DropdownMenu/DropdownMenu.vue'
@@ -62,7 +64,7 @@ export {
   XIcon
 } from './icons'
 
-export { Alert, AlertDialog, Avatar, Badge, Button, Card, Checkbox, Chips, Combobox, DataTable, Drawer, DropdownMenu, EmptyState, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, SectionCard, Select, Tabs, Textarea }
+export { Alert, AlertDialog, Avatar, Badge, Button, Card, Checkbox, Chips, Combobox, DataTable, DatePicker, DateRangePicker, Drawer, DropdownMenu, EmptyState, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, SectionCard, Select, Tabs, Textarea }
 export type { AlertProps, AlertSize, AlertVariants } from './components/Alert/Alert.vue'
 export type { AlertDialogConfirmVariant, AlertDialogProps, AlertDialogSize } from './components/AlertDialog/AlertDialog.vue'
 export type { BadgeSize, BadgeVariant } from './components/Badge/Badge.vue'
@@ -75,6 +77,29 @@ export type {
   DataTableSortDirection,
   DataTableSortMode
 } from './components/DataTable/DataTable.vue'
+export type {
+  DatePickerAlign,
+  DatePickerDaySlotProps,
+  DatePickerMatcher,
+  DatePickerProps,
+  DatePickerSide,
+  DatePickerSize,
+  DatePickerWeekdayFormat,
+  DatePickerWeekStartsOn
+} from './components/DatePicker/DatePicker.vue'
+export type { DateValue } from '@internationalized/date'
+export type {
+  DateRangePickerAlign,
+  DateRangePickerDaySlotProps,
+  DateRangePickerFixedDate,
+  DateRangePickerMatcher,
+  DateRangePickerProps,
+  DateRangePickerSide,
+  DateRangePickerSize,
+  DateRangePickerValue,
+  DateRangePickerWeekdayFormat,
+  DateRangePickerWeekStartsOn
+} from './components/DateRangePicker/DateRangePicker.vue'
 export type {
   DrawerModal,
   DrawerOpenChangeDetails,
@@ -114,6 +139,8 @@ export default {
     app.component('Chips', Chips)
     app.component('Combobox', Combobox)
     app.component('DataTable', DataTable)
+    app.component('DatePicker', DatePicker)
+    app.component('DateRangePicker', DateRangePicker)
     app.component('Drawer', Drawer)
     app.component('EmptyState', EmptyState)
     app.component('DropdownMenu', DropdownMenu)

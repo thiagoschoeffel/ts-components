@@ -362,7 +362,7 @@ function clearValue() {
                       v-slot="dayState"
                       :day="date"
                       :month="month.value"
-                      class="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg text-xs tabular-nums text-slate-700 outline-none transition-colors hover:bg-slate-50 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500/30 data-[outside-view]:text-slate-300 data-[today]:font-semibold data-[today]:text-blue-600 data-[selected]:bg-blue-600 data-[selected]:font-semibold data-[selected]:text-white data-[selected]:hover:bg-blue-700 data-[selected]:hover:text-white data-[disabled]:cursor-not-allowed data-[disabled]:text-slate-200 data-[disabled]:hover:bg-transparent data-[unavailable]:cursor-not-allowed data-[unavailable]:text-slate-300 data-[unavailable]:line-through data-[unavailable]:hover:bg-transparent">
+                      class="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg text-xs tabular-nums text-slate-700 outline-none transition-colors hover:bg-slate-50 hover:text-slate-900 focus-visible:ring-2 focus-visible:ring-blue-500/30 data-[outside-view]:text-slate-300 data-[today]:font-semibold data-[today]:text-blue-600 data-[selected]:bg-blue-600 data-[selected]:font-semibold data-[selected]:!text-white data-[selected]:hover:bg-blue-700 data-[selected]:hover:!text-white data-[disabled]:cursor-not-allowed data-[disabled]:text-slate-200 data-[disabled]:hover:bg-transparent data-[unavailable]:cursor-not-allowed data-[unavailable]:text-slate-300 data-[unavailable]:line-through data-[unavailable]:hover:bg-transparent">
                       <slot
                         name="day"
                         :date="date"

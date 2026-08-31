@@ -1,7 +1,7 @@
 import type { DateValue } from '@internationalized/date'
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import type { VNodeChild } from 'vue'
-import { CalendarDate, getDayOfWeek, parseDate } from '@internationalized/date'
+import { CalendarDate, getDayOfWeek, getLocalTimeZone, parseDate, today } from '@internationalized/date'
 import { ref, shallowRef, watch } from 'vue'
 import DatePicker, {
   type DatePickerDaySlotProps,
@@ -349,6 +349,27 @@ export const States: Story = {
       </div>
     `
   })
+}
+
+export const TodaySelected: Story = {
+  render: () => ({
+    components: { DatePicker },
+    setup: () => ({ currentDate: today(getLocalTimeZone()) }),
+    template: `
+      <DatePicker
+        :model-value="currentDate"
+        label="Dia atual selecionado"
+        description="O número do dia permanece legível quando os estados hoje e selecionado coincidem."
+        default-open />
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Valida a sobreposição dos estados de dia atual e data selecionada, preservando o contraste do número sobre o fundo azul.'
+      }
+    }
+  }
 }
 
 export const Availability: Story = {

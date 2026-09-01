@@ -165,7 +165,7 @@ function optionStateClasses(option: SelectOption) {
         :aria-label="props.ariaLabel"
         :aria-invalid="isInvalid"
         :aria-describedby="describedBy"
-        class="box-border inline-flex w-full min-w-0 cursor-pointer items-center justify-between gap-2 rounded-lg border bg-white text-left text-slate-800 shadow-xs outline-none transition-[border-color,box-shadow,background-color] duration-150 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-300"
+        class="group/select box-border inline-flex w-full min-w-0 cursor-pointer items-center justify-between gap-2 rounded-lg border bg-white text-left text-slate-800 shadow-xs outline-none transition-[border-color,box-shadow,background-color] duration-150 hover:border-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-300"
         :class="[
           controlHeightClasses[props.size],
           triggerSizeClasses[props.size],
@@ -182,7 +182,7 @@ function optionStateClasses(option: SelectOption) {
           <template v-else>{{ props.placeholder }}</template>
         </SelectValue>
         <SelectIcon
-          class="inline-flex shrink-0 items-center justify-center self-center leading-none text-slate-400 transition-transform duration-150 [[data-state=open]_&]:rotate-180"
+          class="inline-flex shrink-0 items-center justify-center self-center leading-none text-slate-400 transition-transform duration-150 group-data-[state=open]/select:rotate-180"
           :class="iconSizeClasses[props.size]">
           <ChevronDownIcon aria-hidden="true" />
         </SelectIcon>

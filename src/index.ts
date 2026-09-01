@@ -49,6 +49,7 @@ export {
   EllipsisIcon,
   FactoryIcon,
   HomeIcon,
+  InfoIcon,
   LogOutIcon,
   MenuIcon,
   MessagesSquareIcon,

@@ -87,8 +87,11 @@ const descriptionSizeClasses: Record<CheckboxSize, string> = {
 
 <template>
   <div
-    class="inline-flex items-start gap-2.5 leading-none"
-    :class="props.disabled ? 'cursor-not-allowed opacity-50' : ''">
+    class="inline-flex gap-2.5 leading-none"
+    :class="[
+      props.description || $slots.description ? 'items-start' : 'items-center',
+      props.disabled ? 'cursor-not-allowed opacity-50' : ''
+    ]">
     <CheckboxRoot
       :id="controlId"
       :aria-label="props.ariaLabel"
@@ -97,8 +100,11 @@ const descriptionSizeClasses: Record<CheckboxSize, string> = {
       :value="props.value"
       :required="props.required"
       :disabled="props.disabled"
-      class="mt-px inline-flex shrink-0 appearance-none items-center justify-center border border-slate-300 bg-gradient-to-b from-white to-slate-100 text-white shadow-xs transition-[background-color,border-color,box-shadow,filter] duration-150 outline-none data-[state=checked]:border-blue-700 data-[state=checked]:bg-gradient-to-b data-[state=checked]:from-blue-500 data-[state=checked]:to-blue-600 data-[state=indeterminate]:border-blue-700 data-[state=indeterminate]:bg-gradient-to-b data-[state=indeterminate]:from-blue-500 data-[state=indeterminate]:to-blue-600 focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 enabled:cursor-pointer enabled:hover:brightness-[1.03] enabled:active:brightness-95 disabled:cursor-not-allowed"
-      :class="controlSizeClasses[props.size]"
+      class="inline-flex shrink-0 appearance-none items-center justify-center border border-slate-300 bg-gradient-to-b from-white to-slate-100 text-white shadow-xs transition-[background-color,border-color,box-shadow,filter] duration-150 outline-none data-[state=checked]:border-blue-700 data-[state=checked]:bg-gradient-to-b data-[state=checked]:from-blue-500 data-[state=checked]:to-blue-600 data-[state=indeterminate]:border-blue-700 data-[state=indeterminate]:bg-gradient-to-b data-[state=indeterminate]:from-blue-500 data-[state=indeterminate]:to-blue-600 focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 enabled:cursor-pointer enabled:hover:brightness-[1.03] enabled:active:brightness-95 disabled:cursor-not-allowed"
+      :class="[
+        controlSizeClasses[props.size],
+        props.description || $slots.description ? 'mt-px' : ''
+      ]"
       @update:model-value="emit('update:modelValue', $event as CheckboxState)">
       <CheckboxIndicator
         force-mount

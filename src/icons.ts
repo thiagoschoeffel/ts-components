@@ -19,6 +19,7 @@ export {
   Ellipsis as EllipsisIcon,
   Factory as FactoryIcon,
   House as HomeIcon,
+  Info as InfoIcon,
   LogOut as LogOutIcon,
   Menu as MenuIcon,
   MessagesSquare as MessagesSquareIcon,

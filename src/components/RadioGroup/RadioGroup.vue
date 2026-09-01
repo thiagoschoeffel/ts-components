@@ -111,14 +111,17 @@ function optionId(index: number) {
       <div
         v-for="(option, index) in props.options"
         :key="option.value"
-        class="inline-flex items-start gap-2.5"
-        :class="props.disabled || option.disabled ? 'cursor-not-allowed opacity-50' : ''">
+        class="inline-flex gap-2.5"
+        :class="[
+          option.description ? 'items-start' : 'items-center',
+          props.disabled || option.disabled ? 'cursor-not-allowed opacity-50' : ''
+        ]">
         <RadioGroupItem
           :id="optionId(index)"
           :value="option.value"
           :disabled="option.disabled"
-          class="mt-px inline-flex shrink-0 appearance-none items-center justify-center rounded-full border border-slate-300 bg-gradient-to-b from-white to-slate-100 shadow-xs transition-[background-color,border-color,box-shadow,filter] duration-150 outline-none data-[state=checked]:border-blue-700 data-[state=checked]:bg-gradient-to-b data-[state=checked]:from-blue-500 data-[state=checked]:to-blue-600 focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 enabled:cursor-pointer enabled:hover:brightness-[1.03] enabled:active:brightness-95 disabled:cursor-not-allowed"
-          :class="controlSizeClasses[props.size]">
+          class="inline-flex shrink-0 appearance-none items-center justify-center rounded-full border border-slate-300 bg-gradient-to-b from-white to-slate-100 shadow-xs transition-[background-color,border-color,box-shadow,filter] duration-150 outline-none data-[state=checked]:border-blue-700 data-[state=checked]:bg-gradient-to-b data-[state=checked]:from-blue-500 data-[state=checked]:to-blue-600 focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 enabled:cursor-pointer enabled:hover:brightness-[1.03] enabled:active:brightness-95 disabled:cursor-not-allowed"
+          :class="[controlSizeClasses[props.size], option.description ? 'mt-px' : '']">
           <RadioGroupIndicator
             class="rounded-full bg-white shadow-xs"
             :class="indicatorSizeClasses[props.size]" />

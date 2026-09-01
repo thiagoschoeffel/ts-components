@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { ref, watch } from 'vue'
 import { CalendarDaysIcon, SettingsIcon } from '../../icons'
 import Button from '../Button/Button.vue'
+import Combobox from '../Combobox/Combobox.vue'
 import Input from '../Input/Input.vue'
 import ScrollArea from '../ScrollArea/ScrollArea.vue'
 import Drawer from './Drawer.vue'
@@ -376,6 +377,49 @@ export const OverScrollableContent: Story = {
     docs: {
       description: {
         story: 'Regressão visual da hierarquia de camadas: barras de rolagem locais ficam sob o backdrop e o painel modal.'
+      }
+    }
+  }
+}
+
+export const OverComboboxContent: Story = {
+  render: () => ({
+    components: { Button, Combobox, Drawer },
+    setup() {
+      const search = ref('ra')
+      return { search }
+    },
+    template: `
+      <div class="min-h-72 w-[min(36rem,calc(100vw-3rem))]">
+        <Combobox
+          v-model:search-value="search"
+          :options="[]"
+          external-filter
+          label="Cliente"
+          placeholder="Buscar cliente...">
+          <template #empty>
+            <div class="space-y-3 py-4">
+              <p>Nenhum cliente encontrado.</p>
+              <Drawer
+                side="right"
+                size="large"
+                title="Novo cliente"
+                description="Adicione os dados essenciais para continuar.">
+                <template #trigger>
+                  <Button size="small" variant="secondary">Adicionar novo cliente</Button>
+                </template>
+                <Input label="Nome" placeholder="Nome do cliente" />
+              </Drawer>
+            </div>
+          </template>
+        </Combobox>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Regressão visual da hierarquia entre portais: ao abrir um drawer a partir de um combobox, o backdrop modal cobre integralmente a lista flutuante.'
       }
     }
   }

@@ -165,11 +165,11 @@ function finishOpening(event: AnimationEvent) {
       </DrawerTrigger>
 
       <DrawerPortal>
-        <DrawerOverlay class="ts-drawer-overlay fixed inset-0 z-40 bg-slate-950/35 backdrop-blur-[1px]" />
+        <DrawerOverlay class="ts-drawer-overlay fixed inset-0 z-[60] bg-slate-950/35 backdrop-blur-[1px]" />
 
         <DrawerContent
           :style="panelStyle"
-          class="ts-drawer-content fixed z-50 flex max-w-full flex-col overflow-hidden border-slate-200 bg-white text-sm text-slate-600 shadow-xl outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-slate-500/40"
+          class="ts-drawer-content fixed z-[60] flex max-w-full flex-col overflow-hidden border-slate-200 bg-white text-sm text-slate-600 shadow-xl outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-slate-500/40"
           :class="[panelClassesBySide[props.side], { 'ts-drawer-opening': opening }]"
           @animationend="finishOpening">
           <DrawerTitle v-if="!props.title || $slots.header" class="sr-only">

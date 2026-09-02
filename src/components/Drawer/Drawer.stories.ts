@@ -27,7 +27,7 @@ const meta = {
         component: `
 Painel modal baseado no Drawer do Reka UI. Inclui gerenciamento de foco, fechamento por Escape ou interação externa, gesto de arrastar na direção da borda e transições coerentes com o ponto de origem.
 
-Use o slot \`trigger\` para o controle de abertura, o slot padrão para o conteúdo e \`footer\` para ações persistentes. Os slots de conteúdo recebem \`close\`, permitindo concluir o fluxo sem controlar o estado externamente.
+Use o slot \`trigger\` para o controle de abertura, o slot padrão para o conteúdo e \`footer\` para ações persistentes. Os slots de conteúdo recebem \`close\`, permitindo concluir o fluxo sem controlar o estado externamente. Quando necessário, o conteúdo central usa automaticamente o \`ScrollArea\` da biblioteca; cabeçalho e rodapé permanecem fixos.
 
 \`title\` é opcional visualmente. Quando omitido, \`accessibleTitle\` mantém um nome para leitores de tela.
 
@@ -342,6 +342,45 @@ export const FormWithFooter: Story = {
     docs: {
       description: {
         story: 'O rodapé permanece fixo enquanto somente o conteúdo central recebe rolagem.'
+      }
+    }
+  }
+}
+
+export const ScrollableContent: Story = {
+  render: () => ({
+    components: { Button, Drawer },
+    template: `
+      <Drawer
+        default-open
+        side="right"
+        size="small"
+        title="Histórico do pedido"
+        description="Acompanhe as alterações mais recentes.">
+        <template #trigger>
+          <Button variant="secondary">Ver histórico</Button>
+        </template>
+
+        <ol class="space-y-3">
+          <li
+            v-for="item in 24"
+            :key="item"
+            class="rounded-lg border border-slate-200 p-3">
+            <p class="font-medium text-slate-800">Atualização {{ item }}</p>
+            <p class="mt-1 text-xs text-slate-500">Pedido atualizado pela equipe de operação.</p>
+          </li>
+        </ol>
+
+        <template #footer>
+          <Button class="w-full" variant="secondary">Exportar histórico</Button>
+        </template>
+      </Drawer>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Conteúdo extenso usa o ScrollArea da biblioteca, enquanto cabeçalho e rodapé permanecem fixos.'
       }
     }
   }

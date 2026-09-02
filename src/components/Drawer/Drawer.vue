@@ -64,6 +64,7 @@ import {
 } from 'reka-ui'
 import { XIcon } from '../../icons'
 import { usePortalLayer } from '../portalLayer'
+import ScrollArea from '../ScrollArea/ScrollArea.vue'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   open: undefined,
@@ -209,9 +210,11 @@ function finishOpening(event: AnimationEvent) {
             </DrawerClose>
           </header>
 
-          <div class="min-h-0 flex-1 overflow-y-auto px-5 py-4">
-            <slot :open="open" :close="close" />
-          </div>
+          <ScrollArea class="min-h-0 flex-1" scrollbar-visibility="auto">
+            <div class="px-5 py-4">
+              <slot :open="open" :close="close" />
+            </div>
+          </ScrollArea>
 
           <footer v-if="$slots.footer" class="shrink-0 border-t border-slate-200 bg-slate-50 px-5 py-4">
             <slot name="footer" :close="close" />

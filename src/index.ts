@@ -24,7 +24,6 @@ import Popover from './components/Popover/Popover.vue'
 import Progress from './components/Progress/Progress.vue'
 import RadioGroup from './components/RadioGroup/RadioGroup.vue'
 import ScrollArea from './components/ScrollArea/ScrollArea.vue'
-import SectionCard from './components/SectionCard/SectionCard.vue'
 import Select from './components/Select/Select.vue'
 import Tabs from './components/Tabs/Tabs.vue'
 import Textarea from './components/Textarea/Textarea.vue'
@@ -80,7 +79,7 @@ export {
   XIcon
 } from './icons'
 
-export { Alert, AlertDialog, Avatar, Badge, Button, Card, Checkbox, Chips, Combobox, DataTable, DatePicker, DateRangePicker, Dialog, Drawer, DropdownMenu, EmptyState, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, SectionCard, Select, Tabs, Textarea, Toggle }
+export { Alert, AlertDialog, Avatar, Badge, Button, Card, Checkbox, Chips, Combobox, DataTable, DatePicker, DateRangePicker, Dialog, Drawer, DropdownMenu, EmptyState, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, Select, Tabs, Textarea, Toggle }
 export type { AlertProps, AlertSize, AlertVariants } from './components/Alert/Alert.vue'
 export type { AlertDialogConfirmVariant, AlertDialogProps, AlertDialogSize } from './components/AlertDialog/AlertDialog.vue'
 export type { BadgeSize, BadgeVariant } from './components/Badge/Badge.vue'
@@ -140,7 +139,6 @@ export type { InputSize, InputType, InputValue } from './components/Input/Input.
 export type { MultiSelectOption, MultiSelectProps, MultiSelectSize } from './components/MultiSelect/MultiSelect.vue'
 export type { PopoverAlign, PopoverProps, PopoverSide, PopoverSize } from './components/Popover/Popover.vue'
 export type { SelectOption, SelectProps, SelectSize } from './components/Select/Select.vue'
-export type { SectionCardProps } from './components/SectionCard/SectionCard.vue'
 export type { TabItem, TabsActivationMode, TabsOrientation, TabsProps, TabsSize, TabsVariant } from './components/Tabs/Tabs.vue'
 export type { TextareaProps, TextareaResize, TextareaSize } from './components/Textarea/Textarea.vue'
 export type { ToggleProps, ToggleSize } from './components/Toggle/Toggle.vue'
@@ -172,7 +170,6 @@ export default {
     app.component('Progress', Progress)
     app.component('RadioGroup', RadioGroup)
     app.component('ScrollArea', ScrollArea)
-    app.component('SectionCard', SectionCard)
     app.component('Select', Select)
     app.component('Tabs', Tabs)
     app.component('Textarea', Textarea)

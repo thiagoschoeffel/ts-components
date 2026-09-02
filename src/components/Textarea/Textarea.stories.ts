@@ -14,13 +14,14 @@ const meta = {
   title: 'Components/Textarea',
   component: Textarea,
   tags: ['autodocs'],
-  parameters: { docs: { description: { component: 'Campo para textos de múltiplas linhas, alinhado aos estados e tamanhos do Input.' } } },
+  parameters: { docs: { description: { component: 'Campo para textos de múltiplas linhas, alinhado aos estados e tamanhos do Input. Por padrão usa um textarea nativo; com richText ativo, oferece formatação e retorna HTML sanitizado no v-model para persistência. A toolbar usa Toggle nos formatos com estado persistente e Select nas escolhas de estilo e tamanho.' } } },
   argTypes: {
-    modelValue: { control: 'text', description: 'Valor atual. Use com v-model.', table: { defaultValue: { summary: "''" } } },
+    modelValue: { control: 'text', description: 'Valor atual. No modo rico, contém HTML sanitizado. Use com v-model.', table: { defaultValue: { summary: "''" } } },
     label: { control: 'text', description: 'Label visível.' },
     description: { control: 'text', description: 'Texto de apoio.' },
     error: { control: 'text', description: 'Mensagem de validação.' },
     invalid: { control: 'boolean', description: 'Ativa o estado inválido.', table: { defaultValue: { summary: 'false' } } },
+    richText: { control: 'boolean', description: 'Ativa a toolbar de formatação e faz o v-model usar HTML sanitizado.', table: { defaultValue: { summary: 'false' } } },
     size: { control: 'select', options: ['small', 'medium', 'large'], description: 'Espaçamento e tipografia.', table: { defaultValue: { summary: 'medium' } } },
     rows: { control: 'number', description: 'Quantidade inicial de linhas.', table: { defaultValue: { summary: '4' } } },
     resize: { control: 'select', options: ['none', 'vertical', 'horizontal', 'both'], description: 'Direções permitidas para redimensionamento.', table: { defaultValue: { summary: 'vertical' } } },
@@ -37,7 +38,7 @@ const meta = {
     maxlength: { control: 'number', description: 'Máximo de caracteres.' },
     'onUpdate:modelValue': { action: 'update:modelValue' }, onInput: { action: 'input' }, onChange: { action: 'change' }, onFocus: { action: 'focus' }, onBlur: { action: 'blur' }
   },
-  args: { modelValue: '', label: 'Observação', description: 'Inclua orientações relevantes.', placeholder: 'Digite uma observação...', rows: 4, resize: 'vertical', size: 'medium', invalid: false, required: false, disabled: false, readonly: false, autofocus: false, spellcheck: true },
+  args: { modelValue: '', label: 'Observação', description: 'Inclua orientações relevantes.', placeholder: 'Digite uma observação...', rows: 4, resize: 'vertical', size: 'medium', invalid: false, richText: false, required: false, disabled: false, readonly: false, autofocus: false, spellcheck: true },
   decorators: [() => ({ template: '<div class="w-[min(32rem,90vw)]"><story /></div>' })],
   render: (args: TextareaStoryArgs) => ({
     components: { Textarea },
@@ -49,4 +50,18 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 export const Playground: Story = {}
+export const RichText: Story = {
+  args: {
+    richText: true,
+    modelValue: '<p><strong>Entrega prioritária.</strong> Avisar o cliente <em>antes</em> de sair.</p>',
+    description: 'O valor emitido pelo v-model é HTML sanitizado e pode ser salvo em um campo textual.'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Ative `richText` somente onde houver necessidade de formatação. O modo simples permanece como default e conserva o comportamento nativo anterior. Os toggles acompanham a seleção atual do editor e a ação de link abre um Dialog com validação do endereço.'
+      }
+    }
+  }
+}
 export const WithError: Story = { args: { error: 'A observação deve ter no máximo 200 caracteres.', modelValue: 'Orientação inválida' } }

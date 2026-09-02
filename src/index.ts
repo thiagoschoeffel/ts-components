@@ -12,6 +12,7 @@ import Combobox from './components/Combobox/Combobox.vue'
 import DataTable from './components/DataTable/DataTable.vue'
 import DatePicker from './components/DatePicker/DatePicker.vue'
 import DateRangePicker from './components/DateRangePicker/DateRangePicker.vue'
+import Dialog from './components/Dialog/Dialog.vue'
 import Drawer from './components/Drawer/Drawer.vue'
 import EmptyState from './components/EmptyState/EmptyState.vue'
 import DropdownMenu from './components/DropdownMenu/DropdownMenu.vue'
@@ -27,13 +28,18 @@ import SectionCard from './components/SectionCard/SectionCard.vue'
 import Select from './components/Select/Select.vue'
 import Tabs from './components/Tabs/Tabs.vue'
 import Textarea from './components/Textarea/Textarea.vue'
+import Toggle from './components/Toggle/Toggle.vue'
 
 export {
   ArrowDownWideNarrowIcon,
+  AlignCenterIcon,
+  AlignLeftIcon,
+  AlignRightIcon,
   ArrowRightIcon,
   ArrowUpNarrowWideIcon,
   BadgeDollarSignIcon,
   BikeIcon,
+  BoldIcon,
   BookOpenIcon,
   BoxesIcon,
   CalendarDaysIcon,
@@ -50,22 +56,31 @@ export {
   FactoryIcon,
   HomeIcon,
   InfoIcon,
+  ItalicIcon,
+  LinkIcon,
+  ListIcon,
+  ListOrderedIcon,
   LogOutIcon,
   MenuIcon,
   MessagesSquareIcon,
   MinusIcon,
   PackageCheckIcon,
   PlusIcon,
+  RedoIcon,
+  RemoveFormattingIcon,
   SearchIcon,
   SettingsIcon,
   TriangleAlertIcon,
+  StrikethroughIcon,
   TruckIcon,
   UserRoundCogIcon,
   UsersIcon,
+  UnderlineIcon,
+  UndoIcon,
   XIcon
 } from './icons'
 
-export { Alert, AlertDialog, Avatar, Badge, Button, Card, Checkbox, Chips, Combobox, DataTable, DatePicker, DateRangePicker, Drawer, DropdownMenu, EmptyState, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, SectionCard, Select, Tabs, Textarea }
+export { Alert, AlertDialog, Avatar, Badge, Button, Card, Checkbox, Chips, Combobox, DataTable, DatePicker, DateRangePicker, Dialog, Drawer, DropdownMenu, EmptyState, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, SectionCard, Select, Tabs, Textarea, Toggle }
 export type { AlertProps, AlertSize, AlertVariants } from './components/Alert/Alert.vue'
 export type { AlertDialogConfirmVariant, AlertDialogProps, AlertDialogSize } from './components/AlertDialog/AlertDialog.vue'
 export type { BadgeSize, BadgeVariant } from './components/Badge/Badge.vue'
@@ -101,6 +116,7 @@ export type {
   DateRangePickerWeekdayFormat,
   DateRangePickerWeekStartsOn
 } from './components/DateRangePicker/DateRangePicker.vue'
+export type { DialogProps, DialogSize } from './components/Dialog/Dialog.vue'
 export type {
   DrawerModal,
   DrawerOpenChangeDetails,
@@ -127,6 +143,8 @@ export type { SelectOption, SelectProps, SelectSize } from './components/Select/
 export type { SectionCardProps } from './components/SectionCard/SectionCard.vue'
 export type { TabItem, TabsActivationMode, TabsOrientation, TabsProps, TabsSize, TabsVariant } from './components/Tabs/Tabs.vue'
 export type { TextareaProps, TextareaResize, TextareaSize } from './components/Textarea/Textarea.vue'
+export type { ToggleProps, ToggleSize } from './components/Toggle/Toggle.vue'
+export { plainTextToRichText, richTextToPlainText, sanitizeRichText } from './components/Textarea/richText'
 
 export default {
   install(app: App) {
@@ -142,6 +160,7 @@ export default {
     app.component('DataTable', DataTable)
     app.component('DatePicker', DatePicker)
     app.component('DateRangePicker', DateRangePicker)
+    app.component('Dialog', Dialog)
     app.component('Drawer', Drawer)
     app.component('EmptyState', EmptyState)
     app.component('DropdownMenu', DropdownMenu)
@@ -157,5 +176,6 @@ export default {
     app.component('Select', Select)
     app.component('Tabs', Tabs)
     app.component('Textarea', Textarea)
+    app.component('Toggle', Toggle)
   }
 }

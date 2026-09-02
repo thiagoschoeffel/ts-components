@@ -47,7 +47,7 @@ export interface ComboboxProps {
 </script>
 
 <script setup lang="ts">
-import { computed, useId } from 'vue'
+import { computed, ref, useId } from 'vue'
 import {
   ComboboxAnchor,
   ComboboxContent,
@@ -59,6 +59,7 @@ import {
   ComboboxViewport
 } from 'reka-ui'
 import { controlHeightClasses } from '../controlSize'
+import { usePortalLayer } from '../portalLayer'
 
 const props = withDefaults(defineProps<ComboboxProps>(), {
   modelValue: undefined,
@@ -100,6 +101,8 @@ const descriptionId = computed(() => `${fieldId.value}-description`)
 const errorId = computed(() => `${fieldId.value}-error`)
 const isInvalid = computed(() => props.invalid || Boolean(props.error))
 const describedBy = computed(() => [props.description ? descriptionId.value : '', props.error ? errorId.value : ''].filter(Boolean).join(' ') || undefined)
+const layerOpen = ref(false)
+const { contentLayerStyle } = usePortalLayer('floating', layerOpen)
 
 const inputSizeClasses: Record<ComboboxSize, string> = {
   small: 'px-2.5 text-xs',
@@ -125,6 +128,10 @@ function selectValue(value: string) {
   if (option)
     emit('select', option)
 }
+
+function updateOpen(open: boolean) {
+  layerOpen.value = open
+}
 </script>
 
 <template>
@@ -140,7 +147,8 @@ function selectValue(value: string) {
       :open-on-focus="true"
       :reset-search-term-on-blur="false"
       :reset-search-term-on-select="false"
-      @update:model-value="selectValue(String($event))">
+      @update:model-value="selectValue(String($event))"
+      @update:open="updateOpen">
       <ComboboxAnchor class="relative">
         <span
           v-if="$slots.leading"
@@ -169,7 +177,8 @@ function selectValue(value: string) {
         <ComboboxContent
           position="popper"
           :side-offset="4"
-          class="z-50 max-h-72 w-[var(--reka-combobox-trigger-width)] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg outline-none">
+          :style="contentLayerStyle"
+          class="max-h-72 w-[var(--reka-combobox-trigger-width)] overflow-hidden rounded-lg border border-slate-200 bg-white shadow-lg outline-none">
           <ComboboxViewport class="p-1">
             <div v-if="props.loading" class="px-3 py-4 text-center text-sm text-slate-500">{{ props.loadingText }}</div>
             <template v-else>

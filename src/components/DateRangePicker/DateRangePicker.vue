@@ -148,6 +148,7 @@ import {
 } from 'reka-ui'
 import { CalendarDaysIcon, ChevronLeftIcon, ChevronRightIcon, XIcon } from '../../icons'
 import { controlHeightClasses } from '../controlSize'
+import { usePortalLayer } from '../portalLayer'
 
 const emptyRange = (): DateRangePickerValue => ({ start: undefined, end: undefined })
 
@@ -218,6 +219,8 @@ const errorId = computed(() => `${fieldId.value}-error`)
 const isInvalid = computed(() => props.invalid || Boolean(props.error))
 const currentValue = shallowRef<DateRangePickerValue>(props.modelValue ?? props.defaultValue ?? emptyRange())
 const currentPlaceholder = shallowRef<DateValue | undefined>(props.placeholderValue ?? props.defaultPlaceholderValue)
+const layerOpen = shallowRef(props.open ?? props.defaultOpen)
+const { contentLayerStyle } = usePortalLayer('floating', layerOpen)
 const hasValue = computed(() => Boolean(currentValue.value.start || currentValue.value.end))
 const describedBy = computed(() => [
   props.description ? descriptionId.value : '',
@@ -241,6 +244,10 @@ watch(() => props.modelValue, value => {
     currentValue.value = value
 })
 watch(() => props.placeholderValue, value => currentPlaceholder.value = value)
+watch(() => props.open, (open) => {
+  if (open !== undefined)
+    layerOpen.value = open
+})
 
 function updateValue(value: DateRangePickerValue) {
   currentValue.value = value
@@ -257,6 +264,12 @@ function clearValue() {
     return
   updateValue(emptyRange())
   emit('clear')
+}
+
+function updateOpen(open: boolean) {
+  if (props.open === undefined)
+    layerOpen.value = open
+  emit('update:open', open)
 }
 </script>
 
@@ -300,7 +313,7 @@ function clearValue() {
       @update:model-value="updateValue"
       @update:placeholder="updatePlaceholder"
       @update:start-value="emit('update:startValue', $event)"
-      @update:open="emit('update:open', $event)">
+      @update:open="updateOpen">
       <DateRangePickerField
         :aria-label="props.label ? undefined : props.ariaLabel"
         :aria-labelledby="props.label ? labelId : undefined"
@@ -362,7 +375,8 @@ function clearValue() {
         :align="props.align"
         :side-offset="props.sideOffset"
         :collision-padding="props.collisionPadding"
-        class="z-50 max-h-[var(--reka-popper-available-height)] max-w-[calc(100vw-1rem)] overflow-auto rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 shadow-lg outline-none">
+        :style="contentLayerStyle"
+        class="max-h-[var(--reka-popper-available-height)] max-w-[calc(100vw-1rem)] overflow-auto rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-800 shadow-lg outline-none">
         <DateRangePickerCalendar v-slot="{ weekDays, grid }">
           <DateRangePickerHeader class="relative mb-3 flex h-8 items-center justify-between">
             <DateRangePickerPrev

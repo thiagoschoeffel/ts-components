@@ -41,6 +41,7 @@ import {
 } from 'reka-ui'
 import Button from '../Button/Button.vue'
 import Card from '../Card/Card.vue'
+import { usePortalLayer } from '../portalLayer'
 
 const props = withDefaults(defineProps<AlertDialogProps>(), {
   open: undefined,
@@ -89,6 +90,7 @@ watch(
 )
 
 const currentOpen = computed(() => props.open ?? uncontrolledOpen.value)
+const { contentLayerStyle, overlayLayerStyle } = usePortalLayer('modal', currentOpen)
 
 function updateOpen(open: boolean) {
   if (props.open === undefined) uncontrolledOpen.value = open
@@ -124,9 +126,10 @@ const sizeClasses: Record<AlertDialogSize, string> = {
       </AlertDialogTrigger>
 
       <AlertDialogPortal>
-        <AlertDialogOverlay class="fixed inset-0 z-40 bg-slate-950/35 backdrop-blur-[1px] data-[state=open]:animate-in data-[state=closed]:animate-out" />
+        <AlertDialogOverlay :style="overlayLayerStyle" class="fixed inset-0 bg-slate-950/35 backdrop-blur-[1px] data-[state=open]:animate-in data-[state=closed]:animate-out" />
         <AlertDialogContent
-          class="fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-slate-500/40"
+          :style="contentLayerStyle"
+          class="fixed left-1/2 top-1/2 w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-slate-500/40"
           :class="sizeClasses[props.size]">
           <AlertDialogTitle v-if="$slots.header" class="sr-only">{{ props.title }}</AlertDialogTitle>
 

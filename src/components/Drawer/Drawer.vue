@@ -63,6 +63,7 @@ import {
   DrawerTrigger
 } from 'reka-ui'
 import { XIcon } from '../../icons'
+import { usePortalLayer } from '../portalLayer'
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   open: undefined,
@@ -127,8 +128,12 @@ const panelStyle = computed(() => ({
 }))
 
 const opening = ref(props.open ?? props.defaultOpen)
+const layerOpen = ref(props.open ?? props.defaultOpen)
+const { contentLayerStyle, overlayLayerStyle } = usePortalLayer('modal', layerOpen)
 
 watch(() => props.open, (open, previousOpen) => {
+  if (open !== undefined)
+    layerOpen.value = open
   if (open && !previousOpen)
     opening.value = true
   else if (!open)
@@ -136,6 +141,8 @@ watch(() => props.open, (open, previousOpen) => {
 })
 
 function forwardOpen(open: boolean, details?: DrawerOpenChangeDetails) {
+  if (props.open === undefined)
+    layerOpen.value = open
   opening.value = open
   emit('update:open', open, details)
 }
@@ -165,11 +172,11 @@ function finishOpening(event: AnimationEvent) {
       </DrawerTrigger>
 
       <DrawerPortal>
-        <DrawerOverlay class="ts-drawer-overlay fixed inset-0 z-[60] bg-slate-950/35 backdrop-blur-[1px]" />
+        <DrawerOverlay :style="overlayLayerStyle" class="ts-drawer-overlay fixed inset-0 bg-slate-950/35 backdrop-blur-[1px]" />
 
         <DrawerContent
-          :style="panelStyle"
-          class="ts-drawer-content fixed z-[60] flex max-w-full flex-col overflow-hidden border-slate-200 bg-white text-sm text-slate-600 shadow-xl outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-slate-500/40"
+          :style="[panelStyle, contentLayerStyle]"
+          class="ts-drawer-content fixed flex max-w-full flex-col overflow-hidden border-slate-200 bg-white text-sm text-slate-600 shadow-xl outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-slate-500/40"
           :class="[panelClassesBySide[props.side], { 'ts-drawer-opening': opening }]"
           @animationend="finishOpening">
           <DrawerTitle v-if="!props.title || $slots.header" class="sr-only">

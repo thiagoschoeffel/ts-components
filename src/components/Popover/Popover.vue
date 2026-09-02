@@ -38,7 +38,7 @@ export interface PopoverProps {
 </script>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import {
   PopoverArrow,
   PopoverClose,
@@ -48,6 +48,7 @@ import {
   PopoverTrigger
 } from 'reka-ui'
 import { XIcon } from '../../icons'
+import { usePortalLayer } from '../portalLayer'
 
 const props = withDefaults(defineProps<PopoverProps>(), {
   open: undefined,
@@ -89,9 +90,24 @@ const widthBySize: Record<PopoverSize, string> = {
   large: '24rem'
 }
 
+const layerOpen = ref(props.open ?? props.defaultOpen)
+const { contentLayerStyle } = usePortalLayer('floating', layerOpen)
+
+watch(() => props.open, (open) => {
+  if (open !== undefined)
+    layerOpen.value = open
+})
+
 const contentStyle = computed(() => ({
+  ...contentLayerStyle.value,
   '--ts-popover-width': widthBySize[props.size]
 }))
+
+function updateOpen(open: boolean) {
+  if (props.open === undefined)
+    layerOpen.value = open
+  emit('update:open', open)
+}
 </script>
 
 <template>
@@ -99,7 +115,7 @@ const contentStyle = computed(() => ({
     :open="props.open"
     :default-open="props.defaultOpen"
     :modal="props.modal"
-    @update:open="emit('update:open', $event)">
+    @update:open="updateOpen">
     <template #default="{ open, close }">
       <PopoverTrigger as-child :disabled="props.disabled">
         <slot name="trigger" :open="open" :disabled="props.disabled" />
@@ -114,7 +130,7 @@ const contentStyle = computed(() => ({
           :avoid-collisions="props.avoidCollisions"
           :collision-padding="props.collisionPadding"
           :style="contentStyle"
-          class="z-50 max-h-[var(--reka-popover-content-available-height)] w-[min(var(--ts-popover-width),calc(100vw-2rem))] overflow-y-auto rounded-xl border border-slate-200 bg-white text-sm text-slate-600 shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-slate-500/40">
+          class="max-h-[var(--reka-popover-content-available-height)] w-[min(var(--ts-popover-width),calc(100vw-2rem))] overflow-y-auto rounded-xl border border-slate-200 bg-white text-sm text-slate-600 shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-slate-500/40">
           <header
             v-if="$slots.header || props.title || props.description || props.showClose"
             class="flex items-start gap-3 border-b border-slate-200 px-4 py-3">

@@ -1,10 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import { ref, watch } from 'vue'
 import { CalendarDaysIcon, SettingsIcon } from '../../icons'
+import AlertDialog from '../AlertDialog/AlertDialog.vue'
 import Button from '../Button/Button.vue'
 import Combobox from '../Combobox/Combobox.vue'
+import DatePicker from '../DatePicker/DatePicker.vue'
+import DateRangePicker from '../DateRangePicker/DateRangePicker.vue'
+import DropdownMenu from '../DropdownMenu/DropdownMenu.vue'
 import Input from '../Input/Input.vue'
+import MultiSelect from '../MultiSelect/MultiSelect.vue'
+import Popover from '../Popover/Popover.vue'
 import ScrollArea from '../ScrollArea/ScrollArea.vue'
+import Select from '../Select/Select.vue'
 import Drawer from './Drawer.vue'
 
 const sides = ['top', 'right', 'bottom', 'left'] as const
@@ -420,6 +427,220 @@ export const OverComboboxContent: Story = {
     docs: {
       description: {
         story: 'Regressão visual da hierarquia entre portais: ao abrir um drawer a partir de um combobox, o backdrop modal cobre integralmente a lista flutuante.'
+      }
+    }
+  }
+}
+
+export const WithSelect: Story = {
+  render: () => ({
+    components: { Button, Drawer, Select },
+    setup() {
+      const reason = ref<string>()
+      const reasonOptions = [
+        { value: 'customer-request', label: 'Solicitação do cliente' },
+        { value: 'unavailable-item', label: 'Item indisponível' },
+        { value: 'other', label: 'Outro motivo' }
+      ]
+      return { reason, reasonOptions }
+    },
+    template: `
+      <Drawer
+        default-open
+        side="right"
+        size="large"
+        title="Cancelar pedido"
+        description="Pedido #148 · Mariana Costa">
+        <template #trigger>
+          <Button variant="danger">Cancelar pedido</Button>
+        </template>
+
+        <Select
+          v-model="reason"
+          default-open
+          label="Motivo"
+          placeholder="Selecione o motivo"
+          :options="reasonOptions"
+          required />
+
+        <template #footer>
+          <div class="flex justify-end">
+            <Button variant="danger" :disabled="!reason">Cancelar pedido</Button>
+          </div>
+        </template>
+      </Drawer>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Regressão visual do Select dentro de um drawer: a lista de opções permanece visível acima do painel e do backdrop modal.'
+      }
+    }
+  }
+}
+
+export const WithMultiSelect: Story = {
+  render: () => ({
+    components: { Button, Drawer, MultiSelect },
+    setup() {
+      const selected = ref<string[]>([])
+      const options = [
+        { value: 'production', label: 'Produção' },
+        { value: 'packing', label: 'Embalagem' },
+        { value: 'delivery', label: 'Entrega' }
+      ]
+      return { options, selected }
+    },
+    template: `
+      <Drawer
+        default-open
+        side="right"
+        size="large"
+        title="Filtrar pedidos"
+        description="Selecione uma ou mais etapas.">
+        <template #trigger>
+          <Button variant="secondary">Filtrar pedidos</Button>
+        </template>
+
+        <MultiSelect
+          v-model="selected"
+          default-open
+          label="Etapas"
+          :options="options" />
+      </Drawer>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Regressão visual do MultiSelect dentro de um drawer: a lista múltipla permanece acima do painel e do backdrop.'
+      }
+    }
+  }
+}
+
+export const PortalComponentsInsideDrawer: Story = {
+  render: () => ({
+    components: {
+      AlertDialog,
+      Button,
+      Combobox,
+      DatePicker,
+      DateRangePicker,
+      Drawer,
+      DropdownMenu,
+      MultiSelect,
+      Popover,
+      Select
+    },
+    setup() {
+      const search = ref('')
+      const singleValue = ref<string>()
+      const multipleValues = ref<string[]>([])
+      const options = [
+        { value: 'first', label: 'Primeira opção' },
+        { value: 'second', label: 'Segunda opção' },
+        { value: 'third', label: 'Terceira opção' }
+      ]
+      const menuItems = [
+        { value: 'edit', label: 'Editar' },
+        { value: 'archive', label: 'Arquivar' }
+      ]
+      return { menuItems, multipleValues, options, search, singleValue }
+    },
+    template: `
+      <Drawer
+        default-open
+        side="right"
+        size="large"
+        title="Componentes em portal"
+        description="Abra cada controle para conferir sua camada sobre o drawer.">
+        <template #trigger>
+          <Button variant="secondary">Verificar componentes</Button>
+        </template>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <Select v-model="singleValue" label="Select" :options="options" />
+          <MultiSelect v-model="multipleValues" label="MultiSelect" :options="options" />
+          <Combobox
+            v-model:search-value="search"
+            label="Combobox"
+            placeholder="Buscar opção..."
+            :options="options" />
+          <DatePicker label="DatePicker" />
+          <DateRangePicker class="sm:col-span-2" label="DateRangePicker" :number-of-months="1" />
+
+          <div class="flex flex-wrap items-end gap-3 sm:col-span-2">
+            <DropdownMenu :items="menuItems">
+              <template #trigger>
+                <Button variant="secondary">Abrir menu</Button>
+              </template>
+            </DropdownMenu>
+
+            <Popover title="Popover" description="Conteúdo flutuante acima do drawer." show-close>
+              <template #trigger>
+                <Button variant="secondary">Abrir popover</Button>
+              </template>
+              <p>O painel permanece visível e interativo.</p>
+            </Popover>
+
+            <AlertDialog
+              title="Modal aninhado"
+              description="O backdrop e o alerta ficam acima do drawer."
+              confirm-label="Entendi"
+              confirm-variant="primary">
+              <template #trigger>
+                <Button variant="secondary">Abrir alerta</Button>
+              </template>
+            </AlertDialog>
+          </div>
+        </div>
+      </Drawer>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Matriz de regressão para portais aninhados: Select, MultiSelect, Combobox, calendários, menu e popover abrem acima do drawer; um novo modal reserva backdrop e superfície acima das camadas anteriores.'
+      }
+    }
+  }
+}
+
+export const NestedModalLayers: Story = {
+  render: () => ({
+    components: { AlertDialog, Button, Drawer },
+    template: `
+      <Drawer
+        default-open
+        side="right"
+        size="large"
+        title="Editar pedido"
+        description="O drawer permanece como a primeira superfície modal.">
+        <template #trigger>
+          <Button variant="secondary">Editar pedido</Button>
+        </template>
+
+        <p>Alterações ainda não foram salvas.</p>
+
+        <AlertDialog
+          default-open
+          title="Descartar alterações?"
+          description="O alerta e seu backdrop devem cobrir integralmente o drawer."
+          cancel-label="Continuar editando"
+          confirm-label="Descartar">
+          <template #trigger>
+            <Button class="mt-5" variant="danger">Descartar alterações</Button>
+          </template>
+        </AlertDialog>
+      </Drawer>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'Regressão visual de modais aninhados: o modal aberto por último recebe backdrop e superfície acima do drawer já ativo.'
       }
     }
   }

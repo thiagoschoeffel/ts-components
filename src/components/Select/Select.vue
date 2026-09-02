@@ -61,6 +61,7 @@ import {
 } from 'reka-ui'
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '../../icons'
 import { controlHeightClasses } from '../controlSize'
+import { usePortalLayer } from '../portalLayer'
 
 const props = withDefaults(defineProps<SelectProps>(), {
   modelValue: undefined,
@@ -100,6 +101,8 @@ const descriptionId = computed(() => `${selectId.value}-description`)
 const errorId = computed(() => `${selectId.value}-error`)
 const isInvalid = computed(() => props.invalid || Boolean(props.error))
 const currentValue = ref(props.modelValue)
+const layerOpen = ref(props.open ?? props.defaultOpen)
+const { contentLayerStyle } = usePortalLayer('floating', layerOpen)
 const selectedOption = computed(() => props.options.find(option => option.value === currentValue.value))
 const describedBy = computed(() => {
   const ids: string[] = []
@@ -123,10 +126,20 @@ const iconSizeClasses: Record<SelectSize, string> = {
 }
 
 watch(() => props.modelValue, value => currentValue.value = value)
+watch(() => props.open, (open) => {
+  if (open !== undefined)
+    layerOpen.value = open
+})
 
 function updateValue(value: string) {
   currentValue.value = value
   emit('update:modelValue', value)
+}
+
+function updateOpen(open: boolean) {
+  if (props.open === undefined)
+    layerOpen.value = open
+  emit('update:open', open)
 }
 
 function optionStateClasses(option: SelectOption) {
@@ -159,7 +172,7 @@ function optionStateClasses(option: SelectOption) {
       :required="props.required"
       :disabled="props.disabled"
       @update:model-value="updateValue(String($event))"
-      @update:open="emit('update:open', $event)">
+      @update:open="updateOpen">
       <SelectTrigger
         :id="selectId"
         :aria-label="props.ariaLabel"
@@ -193,8 +206,8 @@ function optionStateClasses(option: SelectOption) {
           position="popper"
           align="start"
           :side-offset="6"
-          :style="{ width: 'var(--reka-select-trigger-width)' }"
-          class="z-50 max-h-[var(--reka-select-content-available-height)] overflow-hidden rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-xs outline-none">
+          :style="[contentLayerStyle, { width: 'var(--reka-select-trigger-width)' }]"
+          class="max-h-[var(--reka-select-content-available-height)] overflow-hidden rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-xs outline-none">
           <SelectScrollUpButton class="flex h-6 cursor-default items-center justify-center text-slate-400">
             <ChevronUpIcon class="size-4" aria-hidden="true" />
           </SelectScrollUpButton>

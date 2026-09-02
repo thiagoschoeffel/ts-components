@@ -37,6 +37,7 @@ import {
 } from 'reka-ui'
 import { XIcon } from '../../icons'
 import Card from '../Card/Card.vue'
+import { usePortalLayer } from '../portalLayer'
 
 const props = withDefaults(defineProps<DialogProps>(), {
   open: undefined,
@@ -73,6 +74,7 @@ watch(() => props.open, open => {
 })
 
 const currentOpen = computed(() => props.open ?? uncontrolledOpen.value)
+const { contentLayerStyle, overlayLayerStyle } = usePortalLayer('modal', currentOpen)
 
 function updateOpen(open: boolean) {
   if (props.open === undefined)
@@ -99,9 +101,10 @@ const sizeClasses: Record<DialogSize, string> = {
       </DialogTrigger>
 
       <DialogPortal>
-        <DialogOverlay class="fixed inset-0 z-40 bg-slate-950/35 backdrop-blur-[1px]" />
+        <DialogOverlay :style="overlayLayerStyle" class="fixed inset-0 bg-slate-950/35 backdrop-blur-[1px]" />
         <DialogContent
-          class="fixed left-1/2 top-1/2 z-50 w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-slate-500/40"
+          :style="contentLayerStyle"
+          class="fixed left-1/2 top-1/2 w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-slate-500/40"
           :class="sizeClasses[props.size]">
           <DialogTitle v-if="$slots.header" class="sr-only">{{ props.title }}</DialogTitle>
           <DialogDescription v-if="$slots.header && props.description" class="sr-only">

@@ -39,6 +39,7 @@ export type DropdownMenuEntry =
 </script>
 
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import {
   DropdownMenuContent,
   DropdownMenuPortal,
@@ -47,6 +48,7 @@ import {
 } from 'reka-ui'
 import { EllipsisIcon } from '../../icons'
 import DropdownMenuItems from './DropdownMenuItems.vue'
+import { usePortalLayer } from '../portalLayer'
 
 const props = withDefaults(
   defineProps<{
@@ -98,6 +100,20 @@ defineSlots<{
   item?: (props: { item: DropdownMenuActionItem }) => unknown
 }>()
 
+const layerOpen = ref(props.open ?? props.defaultOpen)
+const { contentLayerStyle } = usePortalLayer('floating', layerOpen)
+
+watch(() => props.open, (open) => {
+  if (open !== undefined)
+    layerOpen.value = open
+})
+
+function updateOpen(open: boolean) {
+  if (props.open === undefined)
+    layerOpen.value = open
+  emit('update:open', open)
+}
+
 function forwardSelect(value: string, item: DropdownMenuActionItem, event: Event) {
   emit('select', value, item, event)
 }
@@ -108,7 +124,7 @@ function forwardSelect(value: string, item: DropdownMenuActionItem, event: Event
     :open="props.open"
     :default-open="props.defaultOpen"
     :modal="props.modal"
-    @update:open="emit('update:open', $event)">
+    @update:open="updateOpen">
     <template #default="{ open }">
       <DropdownMenuTrigger as-child :disabled="props.disabled">
         <slot name="trigger" :open="open">
@@ -127,7 +143,8 @@ function forwardSelect(value: string, item: DropdownMenuActionItem, event: Event
           :align="props.align"
           :side-offset="props.sideOffset"
           :loop="props.loop"
-          class="z-50 max-h-[var(--reka-dropdown-menu-content-available-height)] min-w-48 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-xs outline-none">
+          :style="contentLayerStyle"
+          class="max-h-[var(--reka-dropdown-menu-content-available-height)] min-w-48 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-xs outline-none">
           <DropdownMenuItems
             :items="props.items"
             @select="forwardSelect">

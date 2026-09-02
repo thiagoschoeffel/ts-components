@@ -61,6 +61,7 @@ import {
 } from 'reka-ui'
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '../../icons'
 import { controlHeightClasses } from '../controlSize'
+import { usePortalLayer } from '../portalLayer'
 
 const props = withDefaults(defineProps<MultiSelectProps>(), {
   modelValue: () => [],
@@ -100,6 +101,8 @@ const descriptionId = computed(() => `${selectId.value}-description`)
 const errorId = computed(() => `${selectId.value}-error`)
 const isInvalid = computed(() => props.invalid || Boolean(props.error))
 const currentValue = ref<string[]>([...props.modelValue])
+const layerOpen = ref(props.open ?? props.defaultOpen)
+const { contentLayerStyle } = usePortalLayer('floating', layerOpen)
 const selectedValues = computed(() => new Set(currentValue.value))
 const selectedOptions = computed(() => props.options.filter(option => selectedValues.value.has(option.value)))
 const describedBy = computed(() => {
@@ -124,11 +127,21 @@ const iconSizeClasses: Record<MultiSelectSize, string> = {
 }
 
 watch(() => props.modelValue, values => currentValue.value = [...values])
+watch(() => props.open, (open) => {
+  if (open !== undefined)
+    layerOpen.value = open
+})
 
 function updateValue(value: unknown) {
   const values = Array.isArray(value) ? value.map(String) : []
   currentValue.value = values
   emit('update:modelValue', values)
+}
+
+function updateOpen(open: boolean) {
+  if (props.open === undefined)
+    layerOpen.value = open
+  emit('update:open', open)
 }
 
 function optionStateClasses(option: MultiSelectOption) {
@@ -162,7 +175,7 @@ function optionStateClasses(option: MultiSelectOption) {
       :disabled="props.disabled"
       multiple
       @update:model-value="updateValue"
-      @update:open="emit('update:open', $event)">
+      @update:open="updateOpen">
       <SelectTrigger
         :id="selectId"
         :aria-label="props.ariaLabel"
@@ -196,8 +209,8 @@ function optionStateClasses(option: MultiSelectOption) {
           position="popper"
           align="start"
           :side-offset="6"
-          :style="{ width: 'var(--reka-select-trigger-width)' }"
-          class="z-50 max-h-[var(--reka-select-content-available-height)] overflow-hidden rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-xs outline-none">
+          :style="[contentLayerStyle, { width: 'var(--reka-select-trigger-width)' }]"
+          class="max-h-[var(--reka-select-content-available-height)] overflow-hidden rounded-xl border border-slate-200 bg-white p-1.5 text-sm shadow-xs outline-none">
           <SelectScrollUpButton class="flex h-6 cursor-default items-center justify-center text-slate-400">
             <ChevronUpIcon class="size-4" aria-hidden="true" />
           </SelectScrollUpButton>

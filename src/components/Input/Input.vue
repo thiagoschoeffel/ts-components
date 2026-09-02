@@ -153,9 +153,21 @@ const describedBy = computed(() => {
 })
 
 const sizeClasses: Record<InputSize, string> = {
-  small: 'px-2.5 text-xs',
-  medium: 'px-3 text-sm',
-  large: 'px-3.5 text-base'
+  small: 'text-xs',
+  medium: 'text-sm',
+  large: 'text-base'
+}
+
+const defaultLeadingPaddingClasses: Record<InputSize, string> = {
+  small: 'pl-2.5',
+  medium: 'pl-3',
+  large: 'pl-3.5'
+}
+
+const defaultTrailingPaddingClasses: Record<InputSize, string> = {
+  small: 'pr-2.5',
+  medium: 'pr-3',
+  large: 'pr-3.5'
 }
 
 const leadingPaddingClasses: Record<InputSize, string> = {
@@ -263,12 +275,12 @@ defineExpose({
           sizeClasses[props.size],
           controlHeightClasses[props.size],
           $slots.action ? 'rounded-r-none' : '',
-          $slots.leading ? leadingPaddingClasses[props.size] : '',
+          $slots.leading ? leadingPaddingClasses[props.size] : defaultLeadingPaddingClasses[props.size],
           $slots.trailing && showClearButton
             ? doubleTrailingPaddingClasses[props.size]
             : $slots.trailing || showClearButton
               ? trailingPaddingClasses[props.size]
-              : '',
+              : defaultTrailingPaddingClasses[props.size],
           isInvalid
             ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20'
             : 'border-slate-300'

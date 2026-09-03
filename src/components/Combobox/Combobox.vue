@@ -105,15 +105,21 @@ const layerOpen = ref(false)
 const { contentLayerStyle } = usePortalLayer('floating', layerOpen)
 
 const inputSizeClasses: Record<ComboboxSize, string> = {
-  small: 'px-2.5 text-xs',
-  medium: 'px-3 text-sm',
-  large: 'px-3.5 text-base'
+  small: 'text-xs',
+  medium: 'text-sm',
+  large: 'text-base'
+}
+
+const defaultPaddingClasses: Record<ComboboxSize, string> = {
+  small: 'pl-2.5 pr-2.5',
+  medium: 'pl-3 pr-3',
+  large: 'pl-3.5 pr-3.5'
 }
 
 const leadingPaddingClasses: Record<ComboboxSize, string> = {
-  small: 'pl-8',
-  medium: 'pl-9',
-  large: 'pl-10'
+  small: 'pl-8 pr-2.5',
+  medium: 'pl-9 pr-3',
+  large: 'pl-10 pr-3.5'
 }
 
 const leadingIconClasses: Record<ComboboxSize, string> = {
@@ -167,7 +173,7 @@ function updateOpen(open: boolean) {
           :class="[
             controlHeightClasses[props.size],
             inputSizeClasses[props.size],
-            $slots.leading ? leadingPaddingClasses[props.size] : '',
+            $slots.leading ? leadingPaddingClasses[props.size] : defaultPaddingClasses[props.size],
             isInvalid ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : 'border-slate-300'
           ]"
           @update:model-value="emit('update:searchValue', String($event))" />

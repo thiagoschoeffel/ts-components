@@ -48,3 +48,26 @@ export default meta
 type Story = StoryObj<typeof meta>
 export const Playground: Story = {}
 export const Loading: Story = { args: { loading: true } }
+export const SizesWithAndWithoutLeading: Story = {
+  parameters: {
+    controls: { disable: true },
+    docs: { description: { story: 'Compara os três tamanhos com e sem ícone inicial. O espaçamento lateral permanece estável independentemente da ordem dos estilos.' } }
+  },
+  render: () => ({
+    components: { Combobox, SearchIcon },
+    setup() {
+      const values = ref<Record<string, string | undefined>>({})
+      const searches = ref<Record<string, string>>({})
+      return { options, searches, values }
+    },
+    template: `
+      <div class="grid gap-5">
+        <div v-for="size in ['small', 'medium', 'large']" :key="size" class="grid gap-3 sm:grid-cols-2">
+          <Combobox v-model="values[size]" v-model:search-value="searches[size]" :size="size" :options="options" :label="size + ' com ícone'" placeholder="Buscar cliente...">
+            <template #leading><SearchIcon /></template>
+          </Combobox>
+          <Combobox v-model="values[size + '-plain']" v-model:search-value="searches[size + '-plain']" :size="size" :options="options" :label="size + ' sem ícone'" placeholder="Buscar cliente..." />
+        </div>
+      </div>`
+  })
+}

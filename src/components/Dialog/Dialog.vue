@@ -112,7 +112,7 @@ const sizeClasses: Record<DialogSize, string> = {
             {{ props.description }}
           </DialogDescription>
 
-          <Card class="max-h-[calc(100dvh-2rem)] shadow-xl [&>div]:flex [&>div]:min-h-0 [&>div]:flex-col">
+          <Card class="max-h-[calc(100dvh-2rem)] shadow-xl [&>div]:flex [&>div]:min-h-0 [&>div]:flex-col [&>div]:p-0">
             <template #header>
               <div class="flex min-w-0 items-start justify-between gap-4">
                 <div class="min-w-0 flex-1">
@@ -137,7 +137,9 @@ const sizeClasses: Record<DialogSize, string> = {
             <ScrollArea
               class="grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)] [&_[data-reka-scroll-area-viewport]]:min-h-0"
               scrollbar-visibility="auto">
-              <slot :close="() => updateOpen(false)" />
+              <div class="px-6 py-5">
+                <slot :close="() => updateOpen(false)" />
+              </div>
             </ScrollArea>
 
             <template v-if="$slots.footer" #footer>

@@ -20,7 +20,7 @@ const meta = {
     docs: {
       description: {
         component: `
-Diálogo baseado no Reka UI para exibir formulários e conteúdos que exigem foco temporário. Oferece gerenciamento de foco, fechamento por Escape ou clique externo, retorno de foco ao gatilho e rolagem automática do corpo quando o conteúdo excede a viewport. Cabeçalho e rodapé permanecem visíveis durante a rolagem.
+Diálogo baseado no Reka UI para exibir formulários e conteúdos que exigem foco temporário. Oferece gerenciamento de foco, fechamento por Escape ou clique externo, retorno de foco ao gatilho e rolagem automática do corpo quando o conteúdo excede a viewport. Cabeçalho e rodapé permanecem visíveis, e a barra acompanha a lateral interna do diálogo sem sobrepor o conteúdo.
 
 \`\`\`vue
 <Dialog title="Adicionar link" description="Informe o endereço de destino.">

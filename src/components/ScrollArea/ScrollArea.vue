@@ -50,16 +50,16 @@ const contentWidthClasses: Record<ScrollAreaOrientation, string> = {
     <ScrollAreaScrollbar
       v-if="props.orientation === 'vertical' || props.orientation === 'both'"
       orientation="vertical"
-      class="z-50 flex w-2.5 touch-none select-none p-0.5"
-      :class="props.orientation === 'both' && '!bottom-2.5'">
+      class="z-50 flex w-2 touch-none select-none p-0.5"
+      :class="props.orientation === 'both' && '!bottom-2'">
       <ScrollAreaThumb class="relative flex-1 rounded-full bg-slate-300" />
     </ScrollAreaScrollbar>
 
     <ScrollAreaScrollbar
       v-if="props.orientation === 'horizontal' || props.orientation === 'both'"
       orientation="horizontal"
-      class="z-50 flex h-2.5 touch-none select-none p-0.5"
-      :class="props.orientation === 'both' && '!right-2.5'">
+      class="z-50 flex h-2 touch-none select-none p-0.5"
+      :class="props.orientation === 'both' && '!right-2'">
       <ScrollAreaThumb class="relative h-full rounded-full bg-slate-300" />
     </ScrollAreaScrollbar>
 

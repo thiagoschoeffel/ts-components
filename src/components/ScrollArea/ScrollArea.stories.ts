@@ -19,7 +19,7 @@ const meta = {
     docs: {
       description: {
         component: `
-Área de rolagem baseada no Reka UI, com barras consistentes para regiões internas da interface.
+Área de rolagem baseada no Reka UI, com barras finas e consistentes para regiões internas da interface.
 
 \`\`\`vue
 <ScrollArea class="h-64">

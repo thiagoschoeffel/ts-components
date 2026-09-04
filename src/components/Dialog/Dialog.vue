@@ -38,6 +38,7 @@ import {
 import { XIcon } from '../../icons'
 import Card from '../Card/Card.vue'
 import { usePortalLayer } from '../portalLayer'
+import ScrollArea from '../ScrollArea/ScrollArea.vue'
 
 const props = withDefaults(defineProps<DialogProps>(), {
   open: undefined,
@@ -111,7 +112,7 @@ const sizeClasses: Record<DialogSize, string> = {
             {{ props.description }}
           </DialogDescription>
 
-          <Card class="max-h-[calc(100vh-2rem)] shadow-xl">
+          <Card class="max-h-[calc(100dvh-2rem)] shadow-xl [&>div]:flex [&>div]:min-h-0 [&>div]:flex-col">
             <template #header>
               <div class="flex min-w-0 items-start justify-between gap-4">
                 <div class="min-w-0 flex-1">
@@ -133,7 +134,11 @@ const sizeClasses: Record<DialogSize, string> = {
               </div>
             </template>
 
-            <slot :close="() => updateOpen(false)" />
+            <ScrollArea
+              class="grid min-h-0 flex-1 grid-rows-[minmax(0,1fr)] [&_[data-reka-scroll-area-viewport]]:min-h-0"
+              scrollbar-visibility="auto">
+              <slot :close="() => updateOpen(false)" />
+            </ScrollArea>
 
             <template v-if="$slots.footer" #footer>
               <slot name="footer" :close="() => updateOpen(false)" />

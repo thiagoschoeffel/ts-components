@@ -20,7 +20,7 @@ const meta = {
     docs: {
       description: {
         component: `
-Diálogo baseado no Reka UI para exibir formulários e conteúdos que exigem foco temporário. Oferece gerenciamento de foco, fechamento por Escape ou clique externo e retorno de foco ao gatilho.
+Diálogo baseado no Reka UI para exibir formulários e conteúdos que exigem foco temporário. Oferece gerenciamento de foco, fechamento por Escape ou clique externo, retorno de foco ao gatilho e rolagem automática do corpo quando o conteúdo excede a viewport. Cabeçalho e rodapé permanecem visíveis durante a rolagem.
 
 \`\`\`vue
 <Dialog title="Adicionar link" description="Informe o endereço de destino.">
@@ -99,4 +99,39 @@ export const Playground: Story = {}
 
 export const Open: Story = {
   args: { open: true }
+}
+
+export const LongContent: Story = {
+  args: {
+    open: true,
+    size: 'medium',
+    title: 'Conferir etiquetas',
+    description: 'A barra de rolagem aparece somente quando o conteúdo ultrapassa a área disponível.'
+  },
+  render: (args: DialogStoryArgs) => ({
+    components: { Button, Dialog },
+    setup: () => ({ args, items: Array.from({ length: 24 }, (_, index) => `Etiqueta ${index + 1}`) }),
+    template: `
+      <Dialog
+        :open="args.open"
+        :title="args.title"
+        :description="args.description"
+        :size="args.size">
+        <div class="space-y-2">
+          <div
+            v-for="item in items"
+            :key="item"
+            class="rounded-lg border border-slate-200 px-3 py-2 text-sm text-slate-700">
+            {{ item }}
+          </div>
+        </div>
+        <template #footer>
+          <div class="flex justify-end gap-2">
+            <Button variant="secondary">Cancelar</Button>
+            <Button>Confirmar</Button>
+          </div>
+        </template>
+      </Dialog>
+    `
+  })
 }

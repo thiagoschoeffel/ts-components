@@ -243,6 +243,7 @@ export const CustomOption: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'Comparação entre o conteúdo padrão e a personalização por slots: value transforma o valor em badge; option adiciona um marcador a cada item.'
       }

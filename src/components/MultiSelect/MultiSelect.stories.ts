@@ -232,6 +232,7 @@ export const CustomValue: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'Os slots value e option permitem resumir os valores escolhidos e personalizar a apresentação de cada item.'
       }

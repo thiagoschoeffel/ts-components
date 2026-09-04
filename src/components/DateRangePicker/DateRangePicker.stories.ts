@@ -232,5 +232,6 @@ export const BookingRules: Story = {
         description="Até 14 dias; domingos e datas ocupadas não podem ser selecionados."
         default-open />
     `
-  })
+  }),
+  parameters: { docs: { disable: true } }
 }

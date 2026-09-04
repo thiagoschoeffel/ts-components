@@ -365,6 +365,7 @@ export const TodaySelected: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'Valida a sobreposição dos estados de dia atual e data selecionada, preservando o contraste do número sobre o fundo azul.'
       }
@@ -400,6 +401,7 @@ export const Availability: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'Limites de período, domingos desabilitados e dias indisponíveis são comunicados visualmente e às tecnologias assistivas.'
       }
@@ -420,7 +422,8 @@ export const MultipleMonths: Story = {
         description="Dois meses visíveis com navegação paginada."
         default-open />
     `
-  })
+  }),
+  parameters: { docs: { disable: true } }
 }
 
 export const CustomDay: Story = {
@@ -446,6 +449,7 @@ export const CustomDay: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'O slot day permite enriquecer as células sem substituir o comportamento acessível fornecido pelo Reka UI.'
       }

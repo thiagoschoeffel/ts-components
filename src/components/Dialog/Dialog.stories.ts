@@ -98,7 +98,8 @@ type Story = StoryObj<typeof meta>
 export const Playground: Story = {}
 
 export const Open: Story = {
-  args: { open: true }
+  args: { open: true },
+  parameters: { docs: { disable: true } }
 }
 
 export const LongContent: Story = {
@@ -133,5 +134,6 @@ export const LongContent: Story = {
         </template>
       </Dialog>
     `
-  })
+  }),
+  parameters: { docs: { disable: true } }
 }

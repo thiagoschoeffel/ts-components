@@ -379,6 +379,7 @@ export const ScrollableContent: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'Conteúdo extenso usa o ScrollArea da biblioteca, enquanto cabeçalho e rodapé permanecem fixos.'
       }
@@ -421,6 +422,7 @@ export const OverScrollableContent: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'Regressão visual da hierarquia de camadas: barras de rolagem locais ficam sob o backdrop e o painel modal.'
       }
@@ -512,6 +514,7 @@ export const WithSelect: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'Regressão visual do Select dentro de um drawer: a lista de opções permanece visível acima do painel e do backdrop modal.'
       }
@@ -552,6 +555,7 @@ export const WithMultiSelect: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'Regressão visual do MultiSelect dentro de um drawer: a lista múltipla permanece acima do painel e do backdrop.'
       }
@@ -640,6 +644,7 @@ export const PortalComponentsInsideDrawer: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'Matriz de regressão para portais aninhados: Select, MultiSelect, Combobox, calendários, menu e popover abrem acima do drawer; um novo modal reserva backdrop e superfície acima das camadas anteriores.'
       }
@@ -678,6 +683,7 @@ export const NestedModalLayers: Story = {
   }),
   parameters: {
     docs: {
+      disable: true,
       description: {
         story: 'Regressão visual de modais aninhados: o modal aberto por último recebe backdrop e superfície acima do drawer já ativo.'
       }

@@ -22,6 +22,7 @@ import PageHeader from './components/PageHeader/PageHeader.vue'
 import Pagination from './components/Pagination/Pagination.vue'
 import Popover from './components/Popover/Popover.vue'
 import Progress from './components/Progress/Progress.vue'
+import PrintPreview from './components/PrintPreview/PrintPreview.vue'
 import RadioGroup from './components/RadioGroup/RadioGroup.vue'
 import ScrollArea from './components/ScrollArea/ScrollArea.vue'
 import Select from './components/Select/Select.vue'
@@ -31,7 +32,7 @@ import Toggle from './components/Toggle/Toggle.vue'
 
 export * from './icons'
 
-export { Alert, AlertDialog, Avatar, Badge, Button, Card, Checkbox, Chips, Combobox, DataTable, DatePicker, DateRangePicker, Dialog, Drawer, DropdownMenu, EmptyState, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, Select, Tabs, Textarea, Toggle }
+export { Alert, AlertDialog, Avatar, Badge, Button, Card, Checkbox, Chips, Combobox, DataTable, DatePicker, DateRangePicker, Dialog, Drawer, DropdownMenu, EmptyState, Input, MultiSelect, PageHeader, Pagination, Popover, PrintPreview, Progress, RadioGroup, ScrollArea, Select, Tabs, Textarea, Toggle }
 export type { AlertProps, AlertSize, AlertVariants } from './components/Alert/Alert.vue'
 export type { AlertDialogConfirmVariant, AlertDialogProps, AlertDialogSize } from './components/AlertDialog/AlertDialog.vue'
 export type { BadgeSize, BadgeVariant } from './components/Badge/Badge.vue'
@@ -90,6 +91,7 @@ export type {
 export type { InputSize, InputType, InputValue } from './components/Input/Input.vue'
 export type { MultiSelectOption, MultiSelectProps, MultiSelectSize } from './components/MultiSelect/MultiSelect.vue'
 export type { PopoverAlign, PopoverProps, PopoverSide, PopoverSize } from './components/Popover/Popover.vue'
+export type { PrintPreviewProps, PrintPreviewVariant } from './components/PrintPreview/PrintPreview.vue'
 export type { SelectOption, SelectProps, SelectSize } from './components/Select/Select.vue'
 export type { TabItem, TabsActivationMode, TabsOrientation, TabsProps, TabsSize, TabsVariant } from './components/Tabs/Tabs.vue'
 export type { TextareaProps, TextareaResize, TextareaSize } from './components/Textarea/Textarea.vue'
@@ -119,6 +121,7 @@ export default {
     app.component('PageHeader', PageHeader)
     app.component('Pagination', Pagination)
     app.component('Popover', Popover)
+    app.component('PrintPreview', PrintPreview)
     app.component('Progress', Progress)
     app.component('RadioGroup', RadioGroup)
     app.component('ScrollArea', ScrollArea)

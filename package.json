@@ -32,7 +32,7 @@
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
     "build-storybook": "storybook build",
-    "storybook": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006 --no-open",
     "typecheck": "vue-tsc --noEmit",
     "prepack": "npm run build"
   },

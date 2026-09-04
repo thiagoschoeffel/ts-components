@@ -29,55 +29,7 @@ import Tabs from './components/Tabs/Tabs.vue'
 import Textarea from './components/Textarea/Textarea.vue'
 import Toggle from './components/Toggle/Toggle.vue'
 
-export {
-  ArrowDownWideNarrowIcon,
-  AlignCenterIcon,
-  AlignLeftIcon,
-  AlignRightIcon,
-  ArrowRightIcon,
-  ArrowUpNarrowWideIcon,
-  BadgeDollarSignIcon,
-  BikeIcon,
-  BoldIcon,
-  BookOpenIcon,
-  BoxesIcon,
-  CalendarDaysIcon,
-  CheckIcon,
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ChevronUpIcon,
-  CircleDollarSignIcon,
-  ClipboardListIcon,
-  CookingPotIcon,
-  CornerDownRightIcon,
-  EllipsisIcon,
-  FactoryIcon,
-  HomeIcon,
-  InfoIcon,
-  ItalicIcon,
-  LinkIcon,
-  ListIcon,
-  ListOrderedIcon,
-  LogOutIcon,
-  MenuIcon,
-  MessagesSquareIcon,
-  MinusIcon,
-  PackageCheckIcon,
-  PlusIcon,
-  RedoIcon,
-  RemoveFormattingIcon,
-  SearchIcon,
-  SettingsIcon,
-  TriangleAlertIcon,
-  StrikethroughIcon,
-  TruckIcon,
-  UserRoundCogIcon,
-  UsersIcon,
-  UnderlineIcon,
-  UndoIcon,
-  XIcon
-} from './icons'
+export * from './icons'
 
 export { Alert, AlertDialog, Avatar, Badge, Button, Card, Checkbox, Chips, Combobox, DataTable, DatePicker, DateRangePicker, Dialog, Drawer, DropdownMenu, EmptyState, Input, MultiSelect, PageHeader, Pagination, Popover, Progress, RadioGroup, ScrollArea, Select, Tabs, Textarea, Toggle }
 export type { AlertProps, AlertSize, AlertVariants } from './components/Alert/Alert.vue'

@@ -1,49 +1,9 @@
-export {
-  ArrowRight as ArrowRightIcon,
-  ArrowDownWideNarrow as ArrowDownWideNarrowIcon,
-  ArrowUpNarrowWide as ArrowUpNarrowWideIcon,
-  AlignCenter as AlignCenterIcon,
-  AlignLeft as AlignLeftIcon,
-  AlignRight as AlignRightIcon,
-  BadgeDollarSign as BadgeDollarSignIcon,
-  Bike as BikeIcon,
-  Bold as BoldIcon,
-  BookOpen as BookOpenIcon,
-  Boxes as BoxesIcon,
-  CalendarDays as CalendarDaysIcon,
-  Check as CheckIcon,
-  ChevronDown as ChevronDownIcon,
-  ChevronLeft as ChevronLeftIcon,
-  ChevronRight as ChevronRightIcon,
-  ChevronUp as ChevronUpIcon,
-  CircleDollarSign as CircleDollarSignIcon,
-  ClipboardList as ClipboardListIcon,
-  CookingPot as CookingPotIcon,
-  CornerDownRight as CornerDownRightIcon,
-  Ellipsis as EllipsisIcon,
-  Factory as FactoryIcon,
-  House as HomeIcon,
-  Info as InfoIcon,
-  Italic as ItalicIcon,
-  Link as LinkIcon,
-  List as ListIcon,
-  ListOrdered as ListOrderedIcon,
-  LogOut as LogOutIcon,
-  Menu as MenuIcon,
-  MessagesSquare as MessagesSquareIcon,
-  Minus as MinusIcon,
-  PackageCheck as PackageCheckIcon,
-  Plus as PlusIcon,
-  Redo2 as RedoIcon,
-  RemoveFormatting as RemoveFormattingIcon,
-  Search as SearchIcon,
-  Settings as SettingsIcon,
-  TriangleAlert as TriangleAlertIcon,
-  Strikethrough as StrikethroughIcon,
-  Truck as TruckIcon,
-  UserRoundCog as UserRoundCogIcon,
-  Users as UsersIcon,
-  Underline as UnderlineIcon,
-  Undo2 as UndoIcon,
-  X as XIcon
-} from '@lucide/vue'
+/**
+ * Re-export the complete Lucide Vue catalog so every icon is available from
+ * the library entry point. Lucide provides both `IconName` and
+ * `IconNameIcon` aliases for consumers.
+ */
+export * from '@lucide/vue'
+
+// Preserve the shapes previously exposed by these two public aliases.
+export { Redo2 as RedoIcon, Undo2 as UndoIcon } from '@lucide/vue'

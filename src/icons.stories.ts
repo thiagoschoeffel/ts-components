@@ -8,24 +8,24 @@ const meta = {
     docs: {
       description: {
         component:
-          'Icons exported by `@thiagoschoeffel/ts-components`. Import any icon by its displayed name, for example: `import { MenuIcon } from \'@thiagoschoeffel/ts-components\'`.'
+          'Catálogo completo de ícones Lucide exportado por `@thiagoschoeffel/ts-components`. Importe qualquer ícone pelo nome exibido, por exemplo: `import { MenuIcon } from \'@thiagoschoeffel/ts-components\'`.'
       }
     }
   },
   argTypes: {
     size: {
       control: { type: 'range', min: 12, max: 64, step: 1 },
-      description: 'Width and height of every icon.',
+      description: 'Largura e altura de cada ícone.',
       table: { defaultValue: { summary: '24' } }
     },
     color: {
       control: 'color',
-      description: 'Stroke color applied to every icon.',
+      description: 'Cor do traço aplicada a cada ícone.',
       table: { defaultValue: { summary: 'currentColor' } }
     },
     strokeWidth: {
       control: { type: 'range', min: 0.5, max: 4, step: 0.25 },
-      description: 'Stroke width applied to every icon.',
+      description: 'Espessura do traço aplicada a cada ícone.',
       table: { defaultValue: { summary: '2' } }
     }
   },
@@ -58,7 +58,7 @@ export const Gallery: Story = {
             :stroke-width="args.strokeWidth"
             aria-hidden="true"
           />
-          <code class="text-center text-xs font-medium text-slate-700">{{ icon.name }}</code>
+          <code class="max-w-full break-all text-center text-xs font-medium leading-4 text-slate-700">{{ icon.name }}</code>
         </article>
       </div>
     `

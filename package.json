@@ -1,6 +1,6 @@
 {
   "name": "@thiagoschoeffel/ts-components",
-  "version": "0.7.4",
+  "version": "0.7.5",
   "description": "A lightweight component library for Vue 3",
   "type": "module",
   "files": [

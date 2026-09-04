@@ -74,7 +74,7 @@ createApp(App).use(TsComponents).mount('#app')
 
 ## Icons
 
-Selected Lucide icons can be imported directly from the library:
+All Lucide icons can be imported directly from the library:
 
 ```vue
 <script setup lang="ts">
@@ -86,7 +86,8 @@ import { MenuIcon } from '@thiagoschoeffel/ts-components'
 </template>
 ```
 
-To expose another icon, add it to `src/icons.ts`.
+Both Lucide naming forms are available, such as `Menu` and `MenuIcon`. The
+Storybook icon gallery and every icon selector include the complete catalog.
 
 To test without publishing, run `npm pack` in this library and install the
 generated `.tgz` file in the consuming project.

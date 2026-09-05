@@ -42,4 +42,6 @@
 - Nunca implemente, faça commit ou push de épico diretamente em `main` ou `master`.
 - Se commits do épico já estiverem na branch protegida local, crie a branch de trabalho no `HEAD` atual para preservá-los; não faça reset nem descarte alterações.
 - Faça push somente da branch de trabalho, configure o upstream e abra ou atualize um pull request para `main`.
-- Falha de commit, push ou criação do pull request mantém o épico em andamento.
+- Depois de abrir ou atualizar todos os pull requests do épico, integre-os sem exigir ação manual do usuário. Faça o merge imediatamente quando permitido; se checks ou proteções ainda estiverem pendentes, habilite o auto-merge e acompanhe até a integração ser confirmada.
+- Após confirmar todos os merges, faça checkout de `main` em cada repositório afetado e atualize-a por fast-forward a partir de `origin/main`, deixando o workspace pronto para o próximo épico.
+- Falha de commit, push, criação ou merge do pull request, ou de retorno seguro à `main`, mantém o épico em andamento.

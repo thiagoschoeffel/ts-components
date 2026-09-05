@@ -34,3 +34,12 @@
 - Execute `npm run typecheck` após alterações e `npm run build-storybook` quando mudar stories ou apresentação.
 - Para mudanças visuais, confira a story em `http://localhost:6006`; execute `npm run build` antes de concluir mudanças na API pública.
 - Para correções relacionadas a CSS compartilhado, valide também em um consumidor real após navegar entre dois módulos e voltar; conferir apenas a entrada inicial não reproduz problemas de ordem de carregamento.
+
+## Git e execução de épicos
+
+- Não faça commit, push, release ou publish sem solicitação explícita.
+- Quando a execução de um épico de `../ts-host/docs/ROADMAP.md` autorizar versionamento e publicação, crie antes da primeira alteração a mesma branch `feat/eNN-descricao-curta` usada nos demais repositórios afetados.
+- Nunca implemente, faça commit ou push de épico diretamente em `main` ou `master`.
+- Se commits do épico já estiverem na branch protegida local, crie a branch de trabalho no `HEAD` atual para preservá-los; não faça reset nem descarte alterações.
+- Faça push somente da branch de trabalho, configure o upstream e abra ou atualize um pull request para `main`.
+- Falha de commit, push ou criação do pull request mantém o épico em andamento.

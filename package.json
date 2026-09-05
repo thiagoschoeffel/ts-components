@@ -31,6 +31,8 @@
   },
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
+    "check:bundle": "node scripts/check-bundle-budget.mjs",
+    "ci": "npm run typecheck && npm run build && npm run check:bundle && npm run build-storybook",
     "build-storybook": "storybook build",
     "storybook": "storybook dev -p 6006 --no-open",
     "typecheck": "vue-tsc --noEmit",
@@ -52,6 +54,10 @@
     "vite-plugin-dts": "^5.0.3",
     "vue": "^3.5.42",
     "vue-tsc": "^3.1.5"
+  },
+  "bundleBudget": {
+    "js": { "bytes": 650000, "gzipBytes": 140000 },
+    "css": { "bytes": 75000, "gzipBytes": 15000 }
   },
   "keywords": [
     "vue",

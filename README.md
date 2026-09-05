@@ -91,3 +91,9 @@ Storybook icon gallery and every icon selector include the complete catalog.
 
 To test without publishing, run `npm pack` in this library and install the
 generated `.tgz` file in the consuming project.
+
+## Quality gate
+
+`npm run ci` validates strict types, the distributable package, bundle budgets
+and the complete Storybook. Pull requests run the same gate and retain
+immutable build artifacts for 14 days.

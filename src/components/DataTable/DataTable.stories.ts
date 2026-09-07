@@ -3,6 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { EllipsisIcon } from '../../icons'
 import Badge from '../Badge/Badge.vue'
 import Button from '../Button/Button.vue'
+import EmptyState from '../EmptyState/EmptyState.vue'
 import DataTable from './DataTable.vue'
 import Pagination from '../Pagination/Pagination.vue'
 
@@ -323,6 +324,32 @@ export const Empty: Story = {
     docs: {
       description: {
         story: 'O estado vazio ocupa toda a largura disponível e preserva o cabeçalho da tabela.'
+      }
+    }
+  }
+}
+
+export const EmptyWithCustomContent: Story = {
+  render: () => ({
+    components: { DataTable, EmptyState },
+    setup: () => ({ columns: [...columns] }),
+    template: `
+      <div class="box-border h-96 w-full min-w-0 p-4">
+        <DataTable :columns="columns" :rows="[]" :selectable="false" class="size-full">
+          <template #empty>
+            <EmptyState
+              size="large"
+              title="Nenhum pedido encontrado"
+              description="Os pedidos que corresponderem aos filtros aparecerão aqui." />
+          </template>
+        </DataTable>
+      </div>
+    `
+  }),
+  parameters: {
+    docs: {
+      description: {
+        story: 'O cabeçalho permanece visível e o conteúdo vazio fica centralizado horizontal e verticalmente na altura disponível.'
       }
     }
   }

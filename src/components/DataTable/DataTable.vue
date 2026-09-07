@@ -320,7 +320,7 @@ watch(
 <template>
   <div
     ref="rootElement"
-    class="flex min-h-0 min-w-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs">
+    class="relative flex min-h-0 min-w-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xs">
     <span v-if="props.loading" class="sr-only" role="status" aria-live="polite">
       Carregando dados da tabela
     </span>
@@ -511,12 +511,18 @@ watch(
           <tr>
             <td
               :colspan="props.columns.length + (props.selectable ? 1 : 0) + (hasActions ? 1 : 0)"
-              class="h-32 px-6 text-center text-sm text-slate-500">
-              <slot name="empty">{{ props.emptyText }}</slot>
-            </td>
+              class="h-32 px-6"
+              aria-hidden="true" />
           </tr>
         </tbody>
       </table>
     </ScrollArea>
+    <div
+      v-if="!props.loading && displayedRows.length === 0"
+      class="pointer-events-none absolute inset-x-0 bottom-0 top-10 z-[2] flex items-center justify-center px-6 text-center text-sm text-slate-500">
+      <div class="pointer-events-auto max-w-full" :role="$slots.empty ? undefined : 'status'">
+        <slot name="empty">{{ props.emptyText }}</slot>
+      </div>
+    </div>
   </div>
 </template>

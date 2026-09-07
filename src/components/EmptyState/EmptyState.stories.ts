@@ -20,12 +20,12 @@ const meta = {
   title: 'Components/EmptyState',
   component: EmptyState,
   tags: ['autodocs'],
-  parameters: { docs: { description: { component: 'Estado vazio para listas, resultados e áreas ainda sem conteúdo. Quando fornecido, o ícone é destacado em um círculo de fundo slate.' } } },
+  parameters: { docs: { description: { component: 'Estado vazio sem contorno para listas, resultados e áreas ainda sem conteúdo. A borda tracejada é opcional e deve ficar restrita a contextos que precisam delimitar explicitamente uma área.' } } },
   argTypes: {
     title: { control: 'text', description: 'Mensagem principal.' },
     description: { control: 'text', description: 'Orientação ou explicação adicional.' },
     size: { control: 'select', options: ['small', 'medium', 'large'], description: 'Espaçamento interno.', table: { defaultValue: { summary: 'medium' } } },
-    bordered: { control: 'boolean', description: 'Exibe borda tracejada.', table: { defaultValue: { summary: 'true' } } },
+    bordered: { control: 'boolean', description: 'Exibe uma borda tracejada opcional.', table: { defaultValue: { summary: 'false' } } },
     iconName: {
       control: 'select',
       options: iconControlOptions,
@@ -36,7 +36,7 @@ const meta = {
     default: { control: false, description: 'Conteúdo adicional.', table: { category: 'Slots', type: { summary: 'Vue slot' } } },
     action: { control: false, description: 'Ação de recuperação ou criação.', table: { category: 'Slots', type: { summary: 'Vue slot' } } }
   },
-  args: { title: 'Nenhum item adicionado', description: 'Escolha uma oferta para começar.', size: 'medium', bordered: true, iconName: 'PlusIcon' },
+  args: { title: 'Nenhum item adicionado', description: 'Escolha uma oferta para começar.', size: 'medium', bordered: false, iconName: 'PlusIcon' },
   decorators: [() => ({ template: '<div class="w-[min(36rem,90vw)]"><story /></div>' })],
   render: args => ({
     components: { EmptyState },
@@ -62,6 +62,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 export const Playground: Story = {}
+export const Bordered: Story = {
+  args: { bordered: true },
+  parameters: {
+    docs: {
+      description: {
+        story: 'A borda tracejada é uma variação opt-in para áreas que realmente precisam de delimitação visual.'
+      }
+    }
+  }
+}
 export const WithAction: Story = {
   render: args => ({
     components: { EmptyState, Button, PlusIcon },

@@ -8,7 +8,7 @@ export interface EmptyStateProps {
   description?: string
   /** Controls spacing and maximum text width. */
   size?: EmptyStateSize
-  /** Displays the state inside a dashed boundary. */
+  /** Displays the state inside a dashed boundary when the context explicitly requires a delimited drop zone. */
   bordered?: boolean
 }
 </script>
@@ -17,7 +17,7 @@ export interface EmptyStateProps {
 const props = withDefaults(defineProps<EmptyStateProps>(), {
   description: undefined,
   size: 'medium',
-  bordered: true
+  bordered: false
 })
 
 defineSlots<{

@@ -102,7 +102,40 @@ export function plainTextToRichText(value: string) {
 export function richTextToPlainText(value: string) {
   if (!value || typeof DOMParser === 'undefined')
     return ''
-  return new DOMParser().parseFromString(sanitizeRichText(value), 'text/html').body.textContent ?? ''
+
+  const body = new DOMParser().parseFromString(sanitizeRichText(value), 'text/html').body
+  const blockTags = new Set(['blockquote', 'div', 'h2', 'h3', 'li', 'ol', 'p', 'ul'])
+  let text = ''
+
+  function lineBreak() {
+    if (text && !text.endsWith('\n'))
+      text += '\n'
+  }
+
+  function append(node: Node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      text += node.textContent ?? ''
+      return
+    }
+    if (!(node instanceof HTMLElement))
+      return
+
+    const tag = node.tagName.toLowerCase()
+    if (tag === 'br') {
+      text += '\n'
+      return
+    }
+    if (blockTags.has(tag))
+      lineBreak()
+    for (const child of [...node.childNodes])
+      append(child)
+    if (blockTags.has(tag))
+      lineBreak()
+  }
+
+  for (const child of [...body.childNodes])
+    append(child)
+  return text.replace(/\n{3,}/g, '\n\n').replace(/^\n+|\n+$/g, '')
 }
 
 export function normalizeRichText(value: string) {

@@ -53,13 +53,13 @@ export const Playground: Story = {}
 export const RichText: Story = {
   args: {
     richText: true,
-    modelValue: '<p><strong>Entrega prioritária.</strong> Avisar o cliente <em>antes</em> de sair.</p>',
+    modelValue: '<p><strong>Entrega prioritária.</strong></p><p>Avisar o cliente <em>antes</em> de sair.</p><ul><li>Conferir o endereço</li><li>Preservar as observações</li></ul>',
     description: 'O valor emitido pelo v-model é HTML sanitizado e pode ser salvo em um campo textual.'
   },
   parameters: {
     docs: {
       description: {
-        story: 'Ative `richText` somente onde houver necessidade de formatação. O modo simples permanece como default e conserva o comportamento nativo anterior. Os toggles acompanham a seleção atual do editor e a ação de link abre um Dialog com validação do endereço.'
+        story: 'Parágrafos, quebras e itens de lista permanecem separados também quando o conteúdo precisa ser convertido para texto simples em busca ou validação. Os toggles acompanham a seleção atual do editor e a ação de link abre um Dialog com validação do endereço.'
       }
     }
   }

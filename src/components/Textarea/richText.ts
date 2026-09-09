@@ -140,5 +140,6 @@ export function richTextToPlainText(value: string) {
 
 export function normalizeRichText(value: string) {
   const containsSupportedTag = /<\/?(?:a|b|blockquote|br|div|em|font|h[23]|i|li|ol|p|s|span|strike|strong|u|ul)\b/i.test(value)
-  return containsSupportedTag ? sanitizeRichText(value) : plainTextToRichText(value)
+  const containsCharacterReference = /&(?:#\d+|#x[\da-f]+|[a-z][\w]+);/i.test(value)
+  return containsSupportedTag || containsCharacterReference ? sanitizeRichText(value) : plainTextToRichText(value)
 }

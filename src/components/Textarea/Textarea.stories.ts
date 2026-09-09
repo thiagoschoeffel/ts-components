@@ -64,4 +64,18 @@ export const RichText: Story = {
     }
   }
 }
+export const RichTextEntities: Story = {
+  args: {
+    richText: true,
+    modelValue: 'Cliente&nbsp;&amp;&nbsp;fornecedor',
+    description: 'Entidades HTML permanecem estáveis durante a edição, sem acumular escapes como amp;.'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Regressão para conteúdo rico composto apenas por texto e entidades HTML, sem tags de formatação.'
+      }
+    }
+  }
+}
 export const WithError: Story = { args: { error: 'A observação deve ter no máximo 200 caracteres.', modelValue: 'Orientação inválida' } }
